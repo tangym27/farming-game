@@ -1,0 +1,28 @@
+body {
+	font-family: sans-serif;
+}
+
+#inventory_panel {
+	position: absolute;
+	z-index: 1;
+	left: 160px;
+	top: 200px;
+	background-color: white;
+	width: 320px;
+	height: 320px;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+#inventory, #seeds, #tools {
+	position: relative;
+	margin: auto;
+	width: auto;
+	height: 106px;
+	display: flex;
+	flex-direction: row;
+}
+
+.hidden {
+	display: none;
+}
