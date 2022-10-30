@@ -8,10 +8,14 @@
     <style></style>
   </head>
   <body>
-    <h1>Farming Game</h1>
+    <h5>Farming Game</h5>
 
     <div id="game"></div>
 
+    Temp Instructions: Click on the button for what you want to grow. Press
+    space to grow, wait a bit, and space to harvest. Inventory is temporarily
+    listed in upper-left.
+    <br />
     <div id="inventory_panel" class="hidden">
       <div id="inventory">
         <p>Inventory:</p>
@@ -26,6 +30,28 @@
         watering can, fertilizer
       </div>
     </div>
+
+    <button onclick="wheat();">
+      Grow wheat
+    </button>
+    <button onclick="tomatoes();">
+      Grow tomatoes
+    </button>
+    <button onclick="lettuce();">
+      Grow lettuce
+    </button>
+    <button onclick="carrots();">
+      Grow carrots
+    </button>
+    <button onclick="strawberries();">
+      Grow strawberries
+    </button>
+    <button onclick="watermelons();">
+      Grow watermelons
+    </button>
+    <button onclick="pumpkins();">
+      Grow pumpkins
+    </button>
 
     <script src="sketch.js"></script>
   </body>

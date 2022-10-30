@@ -1,6 +1,6 @@
 // Inventory Variables
 const inventory_panel = document.getElementById("inventory_panel");
-const inventory = document.getElementById("inventory");
+// const inventory = document.getElementById("inventory");
 const seeds = document.getElementById("seeds");
 const tools = document.getElementById("tools");
 
@@ -8,6 +8,16 @@ const tools = document.getElementById("tools");
 let tilesetArtwork;
 let cropsArtwork;
 let tileSize = 32;
+
+let inventory = {
+  wheat: 0,
+  tomatoes: 0,
+  lettuce: 0,
+  carrots: 0,
+  strawberries: 0,
+  watermelons: 0,
+  pumpkins: 0,
+};
 
 let bkworld = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -86,8 +96,42 @@ function draw() {
   player.moveAndDisplay();
 
   fill(256);
-  textSize(30);
-  text("water: " + player.water, 10, 20);
+  textSize(20);
+  text("growing : " + player.currentSeed, 10, 15);
+  textSize(12);
+  text("wheat: " + inventory["wheat"], 10, 30);
+  text("tomatoes: " + inventory["tomatoes"], 10, 40);
+  text("lettuce: " + inventory["lettuce"], 10, 50);
+  text("carrots: " + inventory["carrots"], 10, 60);
+  text("strawberries: " + inventory["strawberries"], 10, 70);
+  text("watermelons: " + inventory["watermelons"], 10, 80);
+  text("pumpkin: " + inventory["pumpkins"], 10, 90);
+}
+
+// wheat, tomatoes, lettuce, carrots, strawberries, watermelons, pumpkin;
+
+function wheat() {
+  player.currentSeed = "wheat";
+}
+
+function tomatoes() {
+  player.currentSeed = "tomatoes";
+}
+
+function lettuce() {
+  player.currentSeed = "lettuce";
+}
+function carrots() {
+  player.currentSeed = "carrots";
+}
+function strawberries() {
+  player.currentSeed = "strawberries";
+}
+function watermelons() {
+  player.currentSeed = "watermelons";
+}
+function pumpkins() {
+  player.currentSeed = "pumpkins";
 }
 
 function growPlants() {
@@ -174,8 +218,10 @@ function drawCrop(id, screenX, screenY) {
 function getTileAtPosition(screenX, screenY) {
   let arrayX = int(screenX / tileSize);
   let arrayY = int(screenY / tileSize);
-  let id = world[arrayY][arrayX];
-  return id;
+  if (plantWorld[arrayY][arrayX] != undefined) {
+    return plantWorld[arrayY][arrayX].id;
+  }
+  return -1;
 }
 
 function keyPressed() {
@@ -192,11 +238,28 @@ function keyPressed() {
   }
 }
 
-function setPlant(screenX, screenY) {
+function getPlant(screenX, screenY) {
   let arrayX = int(screenX / tileSize);
   let arrayY = int(screenY / tileSize);
   let p = plantWorld[arrayY][arrayX];
-  if (p.id == 5) p.setId(p.id + 1);
+  return p;
+}
+
+function setPlant(screenX, screenY) {
+  let p = getPlant(screenX, screenY);
+  if (p.id == 5) {
+    p.setId(p.id + 1);
+    p.setSeed(player.currentSeed);
+  }
+}
+
+function checkPlant(screenX, screenY) {
+  let p = getPlant(screenX, screenY);
+  if (p.matured) {
+    inventory[p.seedName]++;
+    p.id = 5;
+    p.matured = false;
+  }
 }
 
 function getState(screenX, screenY) {
@@ -207,6 +270,8 @@ function getState(screenX, screenY) {
     return "dirt";
   } else if (id == 22) {
     return "water";
+  } else if (id > 5 && id < 20) {
+    return "plant";
   }
 }
 
@@ -215,13 +280,23 @@ class Plant {
     this.arrayX = x;
     this.arrayY = y;
     this.graphic = "";
-    this.growthTime = 60;
+    this.growthTime = 10;
     this.currentGrowth = 0;
     this.id = id;
+    this.matured = false;
   }
 
   setId(id) {
     if (id < 10) this.id = id;
+    if (id == 10) {
+      this.id = this.seed;
+      this.matured = true;
+    }
+  }
+
+  setSeed(id) {
+    this.seedName = player.currentSeed;
+    this.seed = this.getSeedId(player.currentSeed);
   }
 
   display() {
@@ -235,6 +310,27 @@ class Plant {
     }
     drawTile(this.id, this.arrayY * tileSize, this.arrayX * tileSize);
   }
+
+  // given a seed, return the id from the tileset
+  getSeedId(seed) {
+    if (seed == "wheat") {
+      return 14;
+    } else if (seed == "tomatoes") {
+      return 18;
+    } else if (seed == "lettuce") {
+      return 17;
+    } else if (seed == "carrots") {
+      return 11;
+    } else if (seed == "strawberries") {
+      return 12;
+    } else if (seed == "watermelons") {
+      return 15;
+    } else if (seed == "pumpkins") {
+      return 13;
+    } else {
+      console.log(seed, "not found");
+    }
+  }
 }
 
 class Player {
@@ -243,6 +339,7 @@ class Player {
     this.y = y;
     this.speed = 5;
     this.water = false;
+    this.currentSeed = "wheat";
   }
 
   computeSensors() {
@@ -271,6 +368,22 @@ class Player {
 
     if (getState(this.middleX, this.down) == "dirt") {
       setPlant(this.middleX, this.down);
+    }
+
+    if (getState(this.right, this.middleY) == "plant") {
+      checkPlant(this.right, this.middleY);
+    }
+
+    if (getState(this.left, this.middleY) == "plant") {
+      checkPlant(this.left, this.middleY);
+    }
+
+    if (getState(this.middleX, this.up) == "plant") {
+      checkPlant(this.middleX, this.up);
+    }
+
+    if (getState(this.middleX, this.down) == "plant") {
+      checkPlant(this.middleX, this.down);
     }
   }
 
