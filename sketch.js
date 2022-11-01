@@ -314,19 +314,19 @@ class Plant {
   // given a seed, return the id from the tileset
   getSeedId(seed) {
     if (seed == "wheat") {
-      return 14;
+      return 16;
     } else if (seed == "tomatoes") {
-      return 18;
+      return 14;
     } else if (seed == "lettuce") {
-      return 17;
-    } else if (seed == "carrots") {
-      return 11;
-    } else if (seed == "strawberries") {
-      return 12;
-    } else if (seed == "watermelons") {
-      return 15;
-    } else if (seed == "pumpkins") {
       return 13;
+    } else if (seed == "carrots") {
+      return 10;
+    } else if (seed == "strawberries") {
+      return 15;
+    } else if (seed == "watermelons") {
+      return 11;
+    } else if (seed == "pumpkins") {
+      return 12;
     } else {
       console.log(seed, "not found");
     }
