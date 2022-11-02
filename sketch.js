@@ -1,3 +1,5 @@
+let canvas;
+
 // Inventory Variables
 const inventory_panel = document.getElementById("inventory_panel");
 // const inventory = document.getElementById("inventory");
@@ -79,7 +81,8 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(640, 640);
+  canvas = createCanvas(640, 640).id("canvas");
+  canvas.parent("#game");
   background(128);
 
   // create our player
@@ -106,6 +109,15 @@ function draw() {
   text("strawberries: " + inventory["strawberries"], 10, 70);
   text("watermelons: " + inventory["watermelons"], 10, 80);
   text("pumpkin: " + inventory["pumpkins"], 10, 90);
+
+  document.getElementById("wheat_inventory").innerHTML = inventory["wheat"];
+  document.getElementById("tomato_inventory").innerHTML = inventory["tomatoes"];
+  document.getElementById("lettuce_inventory").innerHTML = inventory["lettuce"];
+  document.getElementById("carrot_inventory").innerHTML = inventory["carrots"];
+  document.getElementById("strawberry_inventory").innerHTML = inventory["strawberries"];
+  document.getElementById("watermelon_inventory").innerHTML = inventory["watermelons"];
+  document.getElementById("pumpkin_inventory").innerHTML = inventory["pumpkins"];
+
 }
 
 // wheat, tomatoes, lettuce, carrots, strawberries, watermelons, pumpkin;
