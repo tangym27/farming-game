@@ -1,26 +1,58 @@
 body {
 	font-family: sans-serif;
+	width: 90%;
+	margin: auto;
+}
+
+h1 {
+	font-size: 1.5em;
+}
+
+#buttons {
+	/*display: block;
+	margin: auto;*/
+	display: flex;
+	flex-direction: column;
+}
+
+#game {
+	width: 640px;
+	height: 640px;
+	/*display: block;
+	margin: auto;*/
+}
+
+#canvas {
+	/*display: block;
+	margin: auto;*/
+	z-index: -1;
 }
 
 #inventory_panel {
 	position: absolute;
 	z-index: 1;
-	left: 160px;
-	top: 200px;
-	background-color: white;
-	width: 320px;
+	left: 100px;
+	top: 260px;
+	background-color: sandybrown;
+	width: 540px;
 	height: 320px;
-	padding: 20px;
+	padding: 10px;
 	box-sizing: border-box;
 }
 
-#inventory, #seeds, #tools {
-	position: relative;
-	margin: auto;
-	width: auto;
-	height: 106px;
+#inventory_panel_content {
 	display: flex;
 	flex-direction: row;
+}
+
+#inventory, #seeds, #tools {
+	/*position: relative;*/
+	/*margin: auto;*/
+	width: 140px;
+	height: 240px;
+	margin: 10px;
+	/*display: flex;
+	flex-direction: row;*/
 }
 
 .hidden {

@@ -3,55 +3,61 @@
   <head>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
     <title>Midterm Farming Game</title>
-    <link rel="stylesheet" href="styles.css" />
-
+    <link rel="stylesheet" href="styles.css"/>
     <style></style>
   </head>
   <body>
-    <h5>Farming Game</h5>
+    <h1>Farming Game</h1>
+    <p>Temp Instructions: Press "i" to open the inventory window and click on a button to select what you want to grow. Press "i" again to close the inventory window. Press space in front of an empty plot to plant, wait a bit for it to grow, and press space again to harvest. Inventory is temporarily listed in upper-left and on the inventory window.</p>
 
-    <div id="game"></div>
-
-    Temp Instructions: Click on the button for what you want to grow. Press
-    space to grow, wait a bit, and space to harvest. Inventory is temporarily
-    listed in upper-left.
-    <br />
-    <div id="inventory_panel" class="hidden">
-      <div id="inventory">
-        <p>Inventory:</p>
-        wheat, tomatoes, lettuce, carrots, strawberries, watermelons, pumpkin
-      </div>
-      <div id="seeds">
-        <p>Seeds:</p>
-        wheat, tomatoes, lettuce, carrots, strawberries, watermelons, pumpkin
-      </div>
-      <div id="tools">
-        <p>Tools:</p>
-        watering can, fertilizer
+    <div id="game">
+      <div id="inventory_panel" class="hidden">
+        <div id="inventory_panel_content">
+            <div id="inventory">
+            <p>Inventory:</p>
+            <div>
+              <p>Wheat: <span id="wheat_inventory"></span></p>
+              <p>Tomatoes: <span id="tomato_inventory"></span></p>
+              <p>Lettuce: <span id="lettuce_inventory"></span></p>
+              <p>Carrots: <span id="carrot_inventory"></span></p>
+              <p>Strawberries: <span id="strawberry_inventory"></span></p>
+              <p>Watermelons: <span id="watermelon_inventory"></span></p>
+              <p>Pumpkins: <span id="pumpkin_inventory"></span></p>
+            </div>
+          </div>
+          <div id="seeds">
+            <p>Seeds:</p>
+            <div id="buttons">
+              <button onclick="wheat();">
+              Grow wheat
+              </button>
+              <button onclick="tomatoes();">
+                Grow tomatoes
+              </button>
+              <button onclick="lettuce();">
+                Grow lettuce
+              </button>
+              <button onclick="carrots();">
+                Grow carrots
+              </button>
+              <button onclick="strawberries();">
+                Grow strawberries
+              </button>
+              <button onclick="watermelons();">
+                Grow watermelons
+              </button>
+              <button onclick="pumpkins();">
+                Grow pumpkins
+              </button>
+            </div>
+          </div>
+          <div id="tools">
+            <p>Tools:</p>
+            watering can
+          </div>
+        </div>
       </div>
     </div>
-
-    <button onclick="wheat();">
-      Grow wheat
-    </button>
-    <button onclick="tomatoes();">
-      Grow tomatoes
-    </button>
-    <button onclick="lettuce();">
-      Grow lettuce
-    </button>
-    <button onclick="carrots();">
-      Grow carrots
-    </button>
-    <button onclick="strawberries();">
-      Grow strawberries
-    </button>
-    <button onclick="watermelons();">
-      Grow watermelons
-    </button>
-    <button onclick="pumpkins();">
-      Grow pumpkins
-    </button>
 
     <script src="sketch.js"></script>
   </body>
