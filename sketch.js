@@ -11,6 +11,7 @@ let tilesetArtwork;
 let cropsArtwork;
 let tileSize = 32;
 
+let dirtId = 12;
 let inventory = {
   wheat: 0,
   tomatoes: 0,
@@ -50,33 +51,46 @@ let bkworld = [
 ];
 
 let world = [
-  [23, 23, 23, 23, 23, 23, 23, 23, 21, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
-  [23, 23, 23, 23, 23, 23, 23, 23, 21, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
-  [23, 23, 23, 23, 23, 23, 23, 23, 21, 3, 3, 3, 5, 5, 3, 3, 5, 5, 3, 3],
-  [21, 21, 21, 3, 3, 21, 21, 21, 21, 3, 3, 3, 5, 5, 3, 3, 5, 5, 3, 3],
-  [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 5, 3, 3, 5, 5, 3, 3],
-  [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 5, 3, 3, 5, 5, 3, 3],
-  [3, 3, 5, 5, 3, 3, 5, 5, 3, 3, 3, 3, 5, 5, 3, 3, 5, 5, 3, 3],
-  [3, 3, 5, 5, 3, 3, 5, 5, 3, 3, 3, 3, 5, 5, 3, 3, 5, 5, 3, 3],
-  [3, 3, 5, 5, 3, 3, 5, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
-  [3, 3, 5, 5, 3, 3, 5, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
-  [3, 3, 5, 5, 3, 3, 5, 5, 3, 3, 3, 3, 5, 5, 3, 3, 5, 5, 3, 3],
-  [3, 3, 5, 5, 3, 3, 5, 5, 3, 3, 3, 3, 5, 5, 3, 3, 5, 5, 3, 3],
-  [3, 3, 5, 5, 3, 3, 5, 5, 3, 3, 3, 3, 5, 5, 3, 3, 5, 5, 3, 3],
-  [3, 3, 5, 5, 3, 3, 5, 5, 3, 3, 3, 3, 5, 5, 3, 3, 5, 5, 3, 3],
-  [3, 3, 5, 5, 3, 3, 5, 5, 3, 3, 3, 3, 5, 5, 3, 3, 5, 5, 3, 3],
-  [3, 3, 5, 5, 3, 3, 5, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
-  [3, 3, 5, 5, 3, 3, 5, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
-  [3, 3, 5, 5, 3, 3, 5, 5, 3, 3, 3, 22, 22, 22, 22, 22, 22, 22, 22, 3],
-  [3, 3, 5, 5, 3, 3, 5, 5, 3, 3, 3, 22, 22, 22, 22, 22, 22, 22, 22, 3],
+  [51, 51, 51, 51, 51, 51, 51, 51, 49, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+  [51, 51, 51, 51, 51, 51, 51, 51, 49, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+  [51, 51, 51, 51, 51, 51, 51, 51, 49, 3, 3, 3, 12, 12, 3, 3, 12, 12, 3, 3],
+  [49, 49, 49, 3, 3, 49, 49, 49, 49, 3, 3, 3, 12, 12, 3, 3, 12, 12, 3, 3],
+  [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 12, 12, 3, 3, 12, 12, 3, 3],
+  [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 12, 12, 3, 3, 12, 12, 3, 3],
+  [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 3, 12, 12, 3, 3, 12, 12, 3, 3],
+  [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 3, 12, 12, 3, 3, 12, 12, 3, 3],
+  [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+  [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+  [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 3, 12, 12, 3, 3, 12, 12, 3, 3],
+  [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 3, 12, 12, 3, 3, 12, 12, 3, 3],
+  [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 3, 12, 12, 3, 3, 12, 12, 3, 3],
+  [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 3, 12, 12, 3, 3, 12, 12, 3, 3],
+  [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 3, 12, 12, 3, 3, 12, 12, 3, 3],
+  [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+  [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+  [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 50, 50, 50, 50, 50, 50, 50, 50, 3],
+  [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 50, 50, 50, 50, 50, 50, 50, 50, 3],
   [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
 ];
 
+// soil = 12;
+
 let plantWorld = [];
+
+let crops = {
+  wheat: [11, 23, 35, 47, 59],
+  strawberries: [10, 22, 34, 46, 58],
+  tomatoes: [9, 21, 33, 45, 57],
+  lettuce: [8, 20, 32, 44, 56],
+  pumpkins: [7, 19, 31, 43, 55],
+  watermelons: [6, 18, 30, 42, 54],
+  carrots: [5, 17, 29, 41, 53],
+};
+
 let player;
 let playerId = 4;
 function preload() {
-  tilesetArtwork = loadImage("tileset.png");
+  tilesetArtwork = loadImage("fullTileset.png");
   cropsArtwork = loadImage("crops.png");
 }
 
@@ -144,17 +158,6 @@ function watermelons() {
 }
 function pumpkins() {
   player.currentSeed = "pumpkins";
-}
-
-function growPlants() {
-  if (frameCount % 80 == 0) {
-    for (let y = 0; y < plantWorld.length; y++) {
-      for (let x = 0; x < plantWorld[y].length; x++) {
-        let p = plantWorld[y][x];
-        if (p.id > 5) p.setId(p.id + 1);
-      }
-    }
-  }
 }
 
 function drawbkworld() {
@@ -239,7 +242,6 @@ function getTileAtPosition(screenX, screenY) {
 function keyPressed() {
   if (key == " ") {
     player.plant();
-    player.getWater();
   }
   if (key == "i") {
     if (inventory_panel.classList.contains("hidden")) {
@@ -259,17 +261,18 @@ function getPlant(screenX, screenY) {
 
 function setPlant(screenX, screenY) {
   let p = getPlant(screenX, screenY);
-  if (p.id == 5) {
-    p.setId(p.id + 1);
+  if (p.id == dirtId) {
     p.setSeed(player.currentSeed);
   }
 }
 
 function checkPlant(screenX, screenY) {
   let p = getPlant(screenX, screenY);
+  // harvest if possible
   if (p.matured) {
     inventory[p.seedName]++;
-    p.id = 5;
+    p.id = dirtId;
+    p.seedPosition = -1;
     p.matured = false;
   }
 }
@@ -278,11 +281,11 @@ function getState(screenX, screenY) {
   id = getTileAtPosition(screenX, screenY);
   if (id == 3) {
     return "walk";
-  } else if (id == 5) {
+  } else if (id == 12) {
     return "dirt";
-  } else if (id == 22) {
+  } else if (id == 50) {
     return "water";
-  } else if (id > 5 && id < 20) {
+  } else if (id > 5 && id != 49 && id != 51) {
     return "plant";
   }
 }
@@ -292,56 +295,45 @@ class Plant {
     this.arrayX = x;
     this.arrayY = y;
     this.graphic = "";
-    this.growthTime = 10;
-    this.currentGrowth = 0;
+    this.growthTime = 50;
+    this.currentGrowth = this.growthTime + 1;
     this.id = id;
     this.matured = false;
+    this.seedPosition = -1;
   }
 
   setId(id) {
-    if (id < 10) this.id = id;
-    if (id == 10) {
-      this.id = this.seed;
+    if (this.seedPosition >= 4) {
       this.matured = true;
+    } else {
+      this.id = id;
     }
   }
 
   setSeed(id) {
     this.seedName = player.currentSeed;
-    this.seed = this.getSeedId(player.currentSeed);
+    this.grow();
+    this.currentGrowth = 0;
+  }
+
+  grow() {
+    this.seedPosition++;
+    this.setId(crops[this.seedName][this.seedPosition]);
   }
 
   display() {
-    // something has been planted
-    if (this.id > 5) {
-      if (this.currentGrowth == this.growthTime) {
-        this.setId(this.id + 1);
-        this.currentGrowth = 0;
+    if (this.currentGrowth == this.growthTime) {
+      // grow here.
+      if (this.seedPosition != -1 && !this.matured) {
+        this.grow();
       }
-      this.currentGrowth++;
+      this.currentGrowth = 0;
+    }
+    this.currentGrowth++;
+    if (this.seedPosition != -1) {
+      drawTile(dirtId, this.arrayY * tileSize, this.arrayX * tileSize);
     }
     drawTile(this.id, this.arrayY * tileSize, this.arrayX * tileSize);
-  }
-
-  // given a seed, return the id from the tileset
-  getSeedId(seed) {
-    if (seed == "wheat") {
-      return 16;
-    } else if (seed == "tomatoes") {
-      return 14;
-    } else if (seed == "lettuce") {
-      return 13;
-    } else if (seed == "carrots") {
-      return 10;
-    } else if (seed == "strawberries") {
-      return 15;
-    } else if (seed == "watermelons") {
-      return 11;
-    } else if (seed == "pumpkins") {
-      return 12;
-    } else {
-      console.log(seed, "not found");
-    }
   }
 }
 
