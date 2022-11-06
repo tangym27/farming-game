@@ -5,7 +5,7 @@ class Recipe {
     this.ingredients = ingredients;
 
     this.ingredientList = Object.keys(ingredients);
-    // console.log(ingredientList);
+    this.price = price;
   }
 
   canCook(inventory) {
@@ -21,7 +21,7 @@ class Recipe {
     for (let i of this.ingredientList) {
       inventory[i] -= this.ingredients[i];
     }
-    return inventory;
+    profit += this.price;
   }
 }
 

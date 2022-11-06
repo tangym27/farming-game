@@ -69,11 +69,11 @@ class Plant {
     this.currentGrowth++;
     if (this.seedPosition != -1) {
       drawTile(dirtId, this.arrayY * tileSize, this.arrayX * tileSize);
-      text(
-        "growthTime left: " + (this.growthTime - this.currentGrowth),
-        this.arrayY * tileSize,
-        this.arrayX * tileSize
-      );
+      // text(
+      //   "growthTime left: " + (this.growthTime - this.currentGrowth),
+      //   this.arrayY * tileSize,
+      //   this.arrayX * tileSize
+      // );
     }
     drawTile(this.id, this.arrayY * tileSize, this.arrayX * tileSize);
   }

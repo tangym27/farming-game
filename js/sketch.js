@@ -9,11 +9,11 @@ const tools = document.getElementById("tools");
 // Farming Variables
 let tilesetArtwork;
 let cropsArtwork;
-let tileSize = 32;
+
+let profit = 0;
 
 let recipeName, canCook;
 
-let dirtId = 12;
 let inventory = {
   potatoes: 0,
   tomatoes: 0,
@@ -50,18 +50,19 @@ function draw() {
   player.moveAndDisplay();
 
   fill(0);
-  textSize(15);
+  textSize(13);
   text("growing : " + player.currentSeed, 10, 15);
 
   text("potatoes: " + inventory["potatoes"], 10, 30);
   text("tomatoes: " + inventory["tomatoes"], 90, 30);
   text("lettuce: " + inventory["lettuce"], 200, 30);
-  text("carrots: " + inventory["carrots"], 10, 50);
-  text("strawberries: " + inventory["strawberries"], 90, 50);
-  text("watermelons: " + inventory["watermelons"], 200, 50);
-  text("pumpkin: " + inventory["pumpkins"], 10, 70);
-  text("can you cook recipe name " + recipeName + " " + canCook, 10, 80);
-  text("does player have water " + player.water, 10, 90);
+  text("carrots: " + inventory["carrots"], 10, 40);
+  text("strawberries: " + inventory["strawberries"], 90, 40);
+  text("watermelons: " + inventory["watermelons"], 200, 40);
+  text("pumpkin: " + inventory["pumpkins"], 10, 50);
+  text("can you cook recipe name " + recipeName + " " + canCook, 10, 60);
+  text("does player have water " + player.water, 10, 70);
+  text("$$$ profit " + profit, 10, 80);
 
   document.getElementById("potatoes_inventory").innerHTML =
     inventory["potatoes"];
@@ -81,6 +82,11 @@ function cook(recipeNa) {
   let recipe = getRecipe(recipeNa);
   recipeName = recipeNa;
   canCook = recipe.canCook(inventory);
+  if (canCook) {
+    recipe.cook(inventory);
+  } else {
+    return;
+  }
 }
 
 function setPlayerSeed(seed) {
