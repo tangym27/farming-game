@@ -3,20 +3,55 @@
   <head>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
     <title>Midterm Farming Game</title>
-    <link rel="stylesheet" href="styles.css"/>
+    <link rel="stylesheet" href="styles.css" />
     <style></style>
   </head>
   <body>
     <h1>Farming Game</h1>
-    <p>Temp Instructions: Press "i" to open the inventory window and click on a button to select what you want to grow. Press "i" again to close the inventory window. Press space in front of an empty plot to plant, wait a bit for it to grow, and press space again to harvest. Inventory is temporarily listed in upper-left and on the inventory window.</p>
+    <p>
+      Temp Instructions: Press "i" to open the inventory window and click on a
+      button to select what you want to grow. Press "i" again to close the
+      inventory window. Press space in front of an empty plot to plant, wait a
+      bit for it to grow, and press space again to harvest. Inventory is
+      temporarily listed in upper-left and on the inventory window.
+    </p>
 
+    <div>
+      <button onclick="cook('baked potatoes');">
+        baked potatoes
+      </button>
+      <button onclick="cook('strawberry jam');">
+        strawberry jam
+      </button>
+      <button onclick="cook('strawberry mashed potatoes');">
+        strawberry mashed potatoes
+      </button>
+      <button onclick="cook('sliced watermelons');">
+        sliced watermelons
+      </button>
+      <button onclick="cook('salad');">
+        salad
+      </button>
+      <button onclick="cook('kebabs');">
+        kebabs
+      </button>
+      <button onclick="cook('sandwich');">
+        sandwich
+      </button>
+      <button onclick="cook('pumpkin pie');">
+        pumpkin pie
+      </button>
+      <button onclick="cook('carrot cake');">
+        carrot cake
+      </button>
+    </div>
     <div id="game">
       <div id="inventory_panel" class="hidden">
         <div id="inventory_panel_content">
-            <div id="inventory">
+          <div id="inventory">
             <p>Inventory:</p>
             <div>
-              <p>Wheat: <span id="wheat_inventory"></span></p>
+              <p>Wheat: <span id="potatoes_inventory"></span></p>
               <p>Tomatoes: <span id="tomato_inventory"></span></p>
               <p>Lettuce: <span id="lettuce_inventory"></span></p>
               <p>Carrots: <span id="carrot_inventory"></span></p>
@@ -28,25 +63,25 @@
           <div id="seeds">
             <p>Seeds:</p>
             <div id="buttons">
-              <button onclick="wheat();">
-              Grow wheat
+              <button onclick="setPlayerSeed('potatoes');">
+                Grow potatoes
               </button>
-              <button onclick="tomatoes();">
+              <button onclick="setPlayerSeed('tomatoes');">
                 Grow tomatoes
               </button>
-              <button onclick="lettuce();">
+              <button onclick="setPlayerSeed('lettuce');">
                 Grow lettuce
               </button>
-              <button onclick="carrots();">
+              <button onclick="setPlayerSeed('carrots');">
                 Grow carrots
               </button>
-              <button onclick="strawberries();">
+              <button onclick="setPlayerSeed('strawberries');">
                 Grow strawberries
               </button>
-              <button onclick="watermelons();">
+              <button onclick="setPlayerSeed('watermelons');">
                 Grow watermelons
               </button>
-              <button onclick="pumpkins();">
+              <button onclick="setPlayerSeed('pumpkins');">
                 Grow pumpkins
               </button>
             </div>
@@ -59,6 +94,10 @@
       </div>
     </div>
 
-    <script src="sketch.js"></script>
+    <script src="js/sketch.js"></script>
+    <script src="js/recipe.js"></script>
+    <script src="js/display.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/plant.js"></script>
   </body>
 </html>
