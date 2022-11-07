@@ -1,8 +1,9 @@
 let canvas;
 
 // Inventory Variables
-const inventory_panel = document.getElementById("inventory_panel");
-// const inventory = document.getElementById("inventory");
+const seed_panel = document.getElementById("seed_panel");
+const recipe_book = document.getElementById("recipe_book");
+const cant_cook = document.getElementById("cant_cook");
 const seeds = document.getElementById("seeds");
 const tools = document.getElementById("tools");
 
@@ -75,6 +76,15 @@ function draw() {
     inventory["watermelons"];
   document.getElementById("pumpkin_inventory").innerHTML =
     inventory["pumpkins"];
+
+  if (player.water) {
+    document.getElementById("watering_can").innerHTML = "full";
+  } else {
+    document.getElementById("watering_can").innerHTML = "empty";
+  }
+  document.getElementById("profit").innerHTML = "$"+profit;
+
+  // console.log(frameRate());
 }
 
 // potatoes, tomatoes, lettuce, carrots, strawberries, watermelons, pumpkin;
@@ -84,13 +94,17 @@ function cook(recipeNa) {
   canCook = recipe.canCook(inventory);
   if (canCook) {
     recipe.cook(inventory);
+    cant_cook.classList.add("hidden");
+    recipe_book.classList.add("hidden");
   } else {
+    cant_cook.classList.remove("hidden");
     return;
   }
 }
 
 function setPlayerSeed(seed) {
   player.currentSeed = seed;
+  seed_panel.classList.add("hidden");
 }
 
 function getTileAtPosition(screenX, screenY) {
@@ -106,11 +120,23 @@ function keyPressed() {
   if (key == " ") {
     player.plant();
   }
-  if (key == "i") {
-    if (inventory_panel.classList.contains("hidden")) {
-      inventory_panel.classList.remove("hidden");
+
+  if (key == "p") {
+    if (seed_panel.classList.contains("hidden")) {
+      seed_panel.classList.remove("hidden");
+      recipe_book.classList.add("hidden");
     } else {
-      inventory_panel.classList.add("hidden");
+      seed_panel.classList.add("hidden");
+    }
+  }
+
+  if (key == "o") {
+    if (recipe_book.classList.contains("hidden")) {
+      recipe_book.classList.remove("hidden");
+      seed_panel.classList.add("hidden");
+    } else {
+      recipe_book.classList.add("hidden");
+      cant_cook.classList.add("hidden");
     }
   }
 }

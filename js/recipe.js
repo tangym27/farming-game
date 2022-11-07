@@ -31,13 +31,12 @@ function setupRecipes() {
   let recipesData = {
     "baked potatoes": [{ potatoes: 2 }, 8],
     "strawberry jam": [{ strawberries: 3 }, 10],
-    "strawberry mashed potatoes": [{ strawberries: 3 }, 15],
     "sliced watermelons": [{ watermelons: 1 }, 5],
-    salad: [{ lettuce: 1, carrots: 1, tomatoes: 9 }],
-    kebabs: [{ carrots: 1, pumpkins: 1, watermelons: 11 }],
-    sandwich: [{ potatoes: 2, lettuce: 1, tomatoes: 7 }],
+    "salad": [{ lettuce: 1, carrots: 1, tomatoes: 9 }],
+    "kebabs": [{ carrots: 1, pumpkins: 1, watermelons: 11 }],
+    "sandwich": [{ potatoes: 2, lettuce: 1, tomatoes: 7 }],
     "pumpkin pie": [{ potatoes: 2, pumpkins: 18 }],
-    "carrot cake": [{ potatoes: 2, carrots: 20 }],
+    "carrot cake": [{ potatoes: 2, carrots: 20 }]
   };
 
   for (const [key, value] of Object.entries(recipesData)) {
