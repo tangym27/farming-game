@@ -52,18 +52,18 @@ function draw() {
 
   fill(0);
   textSize(13);
-  text("growing : " + player.currentSeed, 10, 15);
-
-  text("potatoes: " + inventory["potatoes"], 10, 30);
-  text("tomatoes: " + inventory["tomatoes"], 90, 30);
-  text("lettuce: " + inventory["lettuce"], 200, 30);
-  text("carrots: " + inventory["carrots"], 10, 40);
-  text("strawberries: " + inventory["strawberries"], 90, 40);
-  text("watermelons: " + inventory["watermelons"], 200, 40);
-  text("pumpkin: " + inventory["pumpkins"], 10, 50);
-  text("can you cook recipe name " + recipeName + " " + canCook, 10, 60);
-  text("does player have water " + player.water, 10, 70);
-  text("$$$ profit " + profit, 10, 80);
+  // text("growing : " + player.currentSeed, 10, 15);
+  //
+  // text("potatoes: " + inventory["potatoes"], 10, 30);
+  // text("tomatoes: " + inventory["tomatoes"], 90, 30);
+  // text("lettuce: " + inventory["lettuce"], 200, 30);
+  // text("carrots: " + inventory["carrots"], 10, 40);
+  // text("strawberries: " + inventory["strawberries"], 90, 40);
+  // text("watermelons: " + inventory["watermelons"], 200, 40);
+  // text("pumpkin: " + inventory["pumpkins"], 10, 50);
+  // text("can you cook recipe name " + recipeName + " " + canCook, 10, 60);
+  // text("does player have water " + player.water, 10, 70);
+  // text("$$$ profit " + profit, 10, 80);
 
   document.getElementById("potatoes_inventory").innerHTML =
     inventory["potatoes"];
@@ -82,7 +82,7 @@ function draw() {
   } else {
     document.getElementById("watering_can").innerHTML = "empty";
   }
-  document.getElementById("profit").innerHTML = "$"+profit;
+  document.getElementById("profit").innerHTML = "$" + profit;
 
   // console.log(frameRate());
 }
