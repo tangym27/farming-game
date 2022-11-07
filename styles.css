@@ -1,102 +1,109 @@
 body {
-	font-family: sans-serif;
-	width: 90%;
-	margin: auto;
+  font-family: sans-serif;
+  width: 90%;
+  margin: auto;
 }
 
 h1 {
-	font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 #game_and_inventory {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 #canvas {
-	display: block;
-	z-index: -1;
+  display: block;
+  z-index: -1;
 }
 
 #seed_panel {
-	position: absolute;
-	z-index: 1;
-	left: 80px;
-	top: 260px;
-	background-color: sandybrown;
-	width: 580px;
-	height: 320px;
-	padding: 10px;
-	box-sizing: border-box;
+  position: absolute;
+  z-index: 1;
+  left: 80px;
+  top: 260px;
+  background-color: sandybrown;
+  width: 580px;
+  height: 320px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 #recipe_book {
-	position: absolute;
-	z-index: 2;
-	left: 80px;
-	top: 260px;
-	background-color: sandybrown;
-	width: 580px;
-	height: 460px;
-	padding: 10px;
-	box-sizing: border-box;
+  position: absolute;
+  z-index: 2;
+  left: 80px;
+  top: 260px;
+  background-color: sandybrown;
+  width: 580px;
+  height: 460px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 #inventory {
-	float: left;
-	display: flex;
-	flex-direction: column;
-	width: 320px;
-	background: sandybrown;
-	margin: 10px;
-	padding-left: 10px;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  background: sandybrown;
+  margin: 10px;
+  padding-left: 10px;
 }
 
 .inventory_item {
-	display: flex;
-	flex-direction: row;
-	margin-top: 5px;
-	margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 h2 {
-	font-size: 1.2em;
+  font-size: 1.2em;
 }
 
 .inventory_item > img {
-	margin-left: 5px;
-	margin-right: 10px;
+  margin-left: 5px;
+  margin-right: 10px;
 }
 
-#seed_buttons, .recipe_buttons {
-	display: flex;
-	flex-direction: row;
+#seed_buttons,
+.recipe_buttons {
+  display: flex;
+  flex-direction: row;
 }
 
-.seed_item, .recipe_item {
-	display: flex;
-	flex-direction: column;
-	padding: 5px;
-	width: 130px;
+.seed_item,
+.recipe_item {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  width: 130px;
 }
 
-.seed_button, .recipe_button {
-	box-sizing: border-box;
-	margin: auto;
+.seed_button,
+.recipe_button {
+  box-sizing: border-box;
+  margin: auto;
 }
 
-.seed_button:hover, .seed_button:active, .recipe_button:hover, .recipe_button:active {
-	border: 2px solid green;
+.seed_button:hover,
+.seed_button:active,
+.recipe_button:hover,
+.recipe_button:active {
+  border: 2px solid green;
 }
 
-#cant_cook {
-	background: red;
-	color: white;
-	width: 385px;
-	padding: 10px;
-	margin: auto;
+#cant_cook,
+#cant_bake {
+  background: red;
+  color: white;
+  width: 385px;
+  padding: 10px;
+  margin: auto;
 }
 
 .hidden {
-	display: none;
+  display: none;
 }

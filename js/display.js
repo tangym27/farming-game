@@ -1,9 +1,10 @@
 let tileSize = 32;
 let dirtId = 12;
 
+// stove is 48 + 49
 let bkworld = [
-  [38, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -30,11 +31,11 @@ let bkworld = [
 ];
 
 let world = [
-  [37, 38, 38, 38, 38, 38, 38, 38, 36, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
-  [37, 3, 48, 40, 49, 48, 3, 38, 36, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
-  [37, 3, 3, 3, 3, 3, 3, 39, 36, 3, 3, 3, 12, 12, 3, 3, 12, 12, 3, 3],
+  [37, 3, 3, 3, 3, 3, 3, 37, 36, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+  [37, 3, 38, 38, 38, 38, 3, 37, 36, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+  [37, 3, 48, 48, 48, 48, 3, 37, 36, 3, 3, 3, 12, 12, 3, 3, 12, 12, 3, 3],
+  [37, 3, 3, 3, 3, 3, 3, 37, 36, 3, 3, 3, 12, 12, 3, 3, 12, 12, 3, 3],
   [24, 25, 26, 3, 3, 24, 25, 25, 26, 3, 3, 3, 12, 12, 3, 3, 12, 12, 3, 3],
-  [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 12, 12, 3, 3, 12, 12, 3, 3],
   [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 12, 12, 3, 3, 12, 12, 3, 3],
   [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 3, 12, 12, 3, 3, 12, 12, 3, 3],
   [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 3, 12, 12, 3, 3, 12, 12, 3, 3],
@@ -115,14 +116,55 @@ function drawTile(id, screenX, screenY) {
   );
 }
 
+function drawPlayer(id, screenX, screenY) {
+  let tilesPerRow = int(characterArtwork.width / tileSize);
+  let imageX = int(id % tilesPerRow) * tileSize;
+  let imageY = int(id / tilesPerRow) * tileSize;
+
+  image(
+    characterArtwork,
+    screenX,
+    screenY,
+    tileSize,
+    tileSize,
+    imageX,
+    imageY,
+    tileSize,
+    tileSize
+  );
+}
+
+function drawRecipe(id, screenX, screenY, progress) {
+  let tilesPerRow = int(foodArtwork.width / tileSize);
+  let imageX = int(id % tilesPerRow) * tileSize;
+  let imageY = int(id / tilesPerRow) * tileSize;
+
+  image(
+    foodArtwork,
+    screenX,
+    screenY,
+    tileSize * progress,
+    tileSize * progress,
+    imageX,
+    imageY,
+    tileSize,
+    tileSize
+  );
+}
+
 function getState(screenX, screenY) {
   id = getTileAtPosition(screenX, screenY);
+
   if (id == 3) {
     return "walk";
   } else if (id == 12) {
     return "dirt";
   } else if (id == 50) {
     return "water";
+  } else if (id == 38) {
+    return "food";
+  } else if (id == 48) {
+    return "stove";
   } else if (id > 5 && id != 49 && id != 51) {
     return "plant";
   }
