@@ -19,10 +19,7 @@ class Stove {
   turnOff() {
     this.on = false;
     this.id = 48;
-<<<<<<< HEAD
 
-=======
->>>>>>> main
     profit += this.recipe.price;
   }
 
@@ -39,21 +36,13 @@ class Stove {
 }
 
 function setupStoves() {
-<<<<<<< HEAD
   for (let x = 2; x < 5; x++) {
-=======
-  for (let x = 2; x < 6; x++) {
->>>>>>> main
     let temp = new Stove(x, 2);
     stoves.push(temp);
   }
 }
 
-<<<<<<< HEAD
 function displayStoves() {
-=======
-function stoveDisplay() {
->>>>>>> main
   for (stove of stoves) {
     drawTile(stove.id, stove.x * tileSize, stove.y * tileSize);
     if (stove.on) {
@@ -64,10 +53,7 @@ function stoveDisplay() {
 
 function cookOnStove(recipe) {
   let stoveNum = constrain(int(player.x / 32) - 1, 0, stoves.length - 1);
-<<<<<<< HEAD
-=======
 
->>>>>>> main
   let stove = stoves[stoveNum];
   if (stove.on) {
     return false;

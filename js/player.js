@@ -7,7 +7,7 @@ class Player {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.speed = 15;
+    this.speed = 5;
     this.water = false;
     this.currentSeed = "potatoes";
     this.graphicOffset = 0;

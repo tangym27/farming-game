@@ -1,10 +1,6 @@
 let recipes = [];
 
 class Recipe {
-<<<<<<< HEAD
-=======
-  // ingredients will be an object like {pumpkin: 2, milk: 1}
->>>>>>> main
   constructor(id, name, ingredients, price) {
     this.id = id;
     this.name = name;
