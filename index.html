@@ -3,93 +3,161 @@
   <head>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
     <title>Midterm Farming Game</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css"/>
     <style></style>
   </head>
+
   <body>
     <h1>Farming Game</h1>
     <p>
-      Temp Instructions: Press "i" to open the inventory window and click on a
-      button to select what you want to grow. Press "i" again to close the
-      inventory window. Press space in front of an empty plot to plant, wait a
+      Temp Instructions: Press "p" to toggle the visibility of the seed popup window and click on the image of the crop you want to grow. Press space in front of an empty plot to plant, wait a
       bit for it to grow, and press space again to harvest. Inventory is
-      temporarily listed in upper-left and on the inventory window.
+      shown to the right of the game screen. Press "o" to toggle the visibility of the recipe book and click on the image of the recipe you want to cook. If you have enough ingredients to cook the food, the food will cook automatically and be sold for its listed cost.
     </p>
 
-    <div>
-      <button onclick="cook('baked potatoes');">
-        baked potatoes
-      </button>
-      <button onclick="cook('strawberry jam');">
-        strawberry jam
-      </button>
-      <button onclick="cook('strawberry mashed potatoes');">
-        strawberry mashed potatoes
-      </button>
-      <button onclick="cook('sliced watermelons');">
-        sliced watermelons
-      </button>
-      <button onclick="cook('salad');">
-        salad
-      </button>
-      <button onclick="cook('kebabs');">
-        kebabs
-      </button>
-      <button onclick="cook('sandwich');">
-        sandwich
-      </button>
-      <button onclick="cook('pumpkin pie');">
-        pumpkin pie
-      </button>
-      <button onclick="cook('carrot cake');">
-        carrot cake
-      </button>
-    </div>
-    <div id="game">
-      <div id="inventory_panel" class="hidden">
-        <div id="inventory_panel_content">
-          <div id="inventory">
-            <p>Inventory:</p>
-            <div>
-              <p>Wheat: <span id="potatoes_inventory"></span></p>
-              <p>Tomatoes: <span id="tomato_inventory"></span></p>
-              <p>Lettuce: <span id="lettuce_inventory"></span></p>
-              <p>Carrots: <span id="carrot_inventory"></span></p>
-              <p>Strawberries: <span id="strawberry_inventory"></span></p>
-              <p>Watermelons: <span id="watermelon_inventory"></span></p>
-              <p>Pumpkins: <span id="pumpkin_inventory"></span></p>
-            </div>
-          </div>
+    <div id="game_and_inventory">
+      <div id="game">
+        <div id="seed_panel" class="hidden">
           <div id="seeds">
-            <p>Seeds:</p>
-            <div id="buttons">
-              <button onclick="setPlayerSeed('potatoes');">
-                Grow potatoes
-              </button>
-              <button onclick="setPlayerSeed('tomatoes');">
-                Grow tomatoes
-              </button>
-              <button onclick="setPlayerSeed('lettuce');">
-                Grow lettuce
-              </button>
-              <button onclick="setPlayerSeed('carrots');">
-                Grow carrots
-              </button>
-              <button onclick="setPlayerSeed('strawberries');">
-                Grow strawberries
-              </button>
-              <button onclick="setPlayerSeed('watermelons');">
-                Grow watermelons
-              </button>
-              <button onclick="setPlayerSeed('pumpkins');">
-                Grow pumpkins
-              </button>
+            <h2>Seeds:</h2>
+            <p>Click the image for the ingredient you want to grow to select its seed.</p>
+            <div id="seed_buttons">
+              <div class="seed_item">
+                <input class="seed_button" type="image" name="grow_potato" src="images/inventory_potato.png" width="32" height="32" alt="potato, click to grow potatoes" onclick="setPlayerSeed('potatoes');"> 
+                <p>Potatoes</p>
+              </div>
+              <div class="seed_item">
+                <input class="seed_button" type="image" name="grow_potato" src="images/inventory_tomato.png" width="32" height="32" alt="totato, click to grow tomatoes" onclick="setPlayerSeed('tomatoes');"> 
+                <p>Tomatoes</p>
+              </div>
+              <div class="seed_item">
+                <input class="seed_button" type="image" name="grow_lettuce" src="images/inventory_lettuce.png" width="32" height="32" alt="lettuce, click to grow lettuce" onclick="setPlayerSeed('lettuce');"> 
+                <p>Lettuce</p>
+              </div>
+              <div class="seed_item">
+                <input class="seed_button" type="image" name="grow_carrot" src="images/inventory_carrot.png" width="32" height="32" alt="carrot, click to grow carrots" onclick="setPlayerSeed('carrots');"> 
+                <p>Carrots</p>
+              </div>
+              <div class="seed_item">
+                <input class="seed_button" type="image" name="grow_strawberry" src="images/inventory_strawberry.png" width="32" height="32" alt="strawberry, click to grow strawberries" onclick="setPlayerSeed('strawberries');"> 
+                <p>Strawberries</p>
+              </div>
+              <div class="seed_item">
+                <input class="seed_button" type="image" name="grow_watermelon" src="images/inventory_watermelon.png" width="32" height="32" alt="watermelon, click to grow watermelons" onclick="setPlayerSeed('watermelons');"> 
+                <p>Watermelons</p>
+              </div>
+              <div class="seed_item">
+                <input class="seed_button" type="image" name="grow_pumpkin" src="images/inventory_pumpkin.png" width="32" height="32" alt="pumpkin, click to grow pumpkins" onclick="setPlayerSeed('pumpkins');"> 
+                <p>Pumpkins</p>
+              </div> 
             </div>
           </div>
-          <div id="tools">
-            <p>Tools:</p>
-            watering can
+        </div>
+        <div id="recipe_book" class="hidden">
+          <div id="recipes">
+            <h2>Recipes:</h2>
+            <p>Click the image for the recipe you want to cook.</p>
+            <div class="recipe_buttons">
+              <div class="recipe_item">
+                <button onclick="cook('baked potatoes');">
+                  baked potatoes
+                </button>
+                <!-- <input class="recipe_button" type="image" src="#" width="32" height="32" alt="click to cook baked potatoes" onclick="cook('baked potatoes');">  -->
+                <p>Baked Potatoes ($8):<br> 2 potatoes</p>
+              </div>
+              <div class="recipe_item">
+                <button onclick="cook('strawberry jam');">
+                  strawberry jam
+                </button>
+                <!-- <input class="recipe_button" type="image" src="#" width="32" height="32" alt="click to cook strawberry jam" onclick="cook('strawberry jam');">  -->
+                <p>Strawberry Jam ($10):<br> 3 strawberries</p>
+              </div>
+              <div class="recipe_item">
+                <button onclick="cook('sliced watermelons');">
+                  sliced watermelons
+                </button>
+                <!-- <input class="recipe_button" type="image" src="#" width="32" height="32" alt="click to cook sliced watermelons" onclick="cook('sliced watermelons');">  -->
+                <p>Sliced Watermelons ($5):<br> 1 watermelon</p>
+              </div>
+              <div class="recipe_item">
+                <button onclick="cook('salad');">
+                  salad
+                </button>
+                <!-- <input class="recipe_button" type="image" src="#" width="32" height="32" alt="click to cook salad" onclick="cook('salad');">  -->
+                <p>Salad ($):<br> 9 tomatoes,<br> 1 lettuce,<br> 1 carrot</p>
+              </div>
+            </div>
+
+            <div class="recipe_buttons">
+              <div class="recipe_item">
+                <button onclick="cook('kebabs');">
+                  kebabs
+                </button>
+                <!-- <input class="recipe_button" type="image" src="#" width="32" height="32" alt="click to cook kebabs" onclick="cook('kebabs');">  -->
+                <p>Kebabs ($):<br> 1 carrot,<br> 11 watermelons,<br> 1 pumpkin</p>
+              </div>
+              <div class="recipe_item">
+                <button onclick="cook('sandwich');">
+                  sandwich
+                </button>
+                <!-- <input class="recipe_button" type="image" src="#" width="32" height="32" alt="click to cook sandwich" onclick="cook('sandwich');">  -->
+                <p>Sandwich ($):<br> 2 potatoes,<br> 7 tomatoes,<br> 1 lettuce</p>
+              </div>
+              <div class="recipe_item">
+                <button onclick="cook('pumpkin pie');">
+                  pumpkin pie
+                </button>
+                <!-- <input class="recipe_button" type="image" src="#" width="32" height="32" alt="click to cook pumpkin pie" onclick="cook('pumpkin pie');">  -->
+                <p>Pumpkin Pie ($):<br> 2 potatoes,<br> 18 pumpkins</p>
+              </div>
+              <div class="recipe_item">
+                <button onclick="cook('carrot cake');">
+                  carrot cake
+                </button>
+                <!-- <input class="recipe_button" type="image" src="#" width="32" height="32" alt="click to cook carrot cake" onclick="cook('carrot cake');">  -->
+                <p>Carrot Cake ($):<br> 2 potatoes,<br> 20 carrots</p>
+              </div>
+            </div>
+
+            <p id="cant_cook" class="hidden">You don't have enough ingredients to cook this recipe!</p>
+
           </div>
+        </div>
+      </div>
+
+      <div id="inventory">
+        <h2>Total Profit: <span id="profit"></span></h2>
+
+        <h2>Watering Can is <span id="watering_can"></span>!</h2>
+
+        <h2>Inventory:</h2>
+        <div class="inventory_item">
+          <img src="images/inventory_potato.png" width="32" height="32">
+          <p>Potatoes: <span id="potatoes_inventory"></span></p>
+        </div>
+        <div class="inventory_item">
+          <img src="images/inventory_tomato.png" width="32" height="32">
+          <p>Tomatoes: <span id="tomato_inventory"></span></p>
+        </div>
+        <div class="inventory_item">
+          <img src="images/inventory_lettuce.png" width="32" height="32">
+          <p>Lettuce: <span id="lettuce_inventory"></span></p>
+        </div>
+        <div class="inventory_item">
+          <img src="images/inventory_carrot.png" width="32" height="32">
+          <p>Carrots: <span id="carrot_inventory"></span></p>
+        </div>
+        <div class="inventory_item">
+          <img src="images/inventory_strawberry.png" width="32" height="32">
+          <p>Strawberries: <span id="strawberry_inventory"></span></p>
+        </div>
+        <div class="inventory_item">
+          <img src="images/inventory_watermelon.png" width="32" height="32">
+          <p>Watermelons: <span id="watermelon_inventory"></span></p>
+        </div>
+        <div class="inventory_item">
+          <img src="images/inventory_pumpkin.png" width="32" height="32">
+          <p>Pumpkins: <span id="pumpkin_inventory"></span></p>
         </div>
       </div>
     </div>
