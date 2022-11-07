@@ -1,32 +1,3 @@
-function getPlant(screenX, screenY) {
-  let arrayX = int(screenX / tileSize);
-  let arrayY = int(screenY / tileSize);
-  let p = plantWorld[arrayY][arrayX];
-  return p;
-}
-
-function setPlant(screenX, screenY) {
-  let p = getPlant(screenX, screenY);
-  if (p.id == dirtId) {
-    p.setSeed(player.currentSeed);
-  }
-}
-
-function checkPlant(screenX, screenY) {
-  let p = getPlant(screenX, screenY);
-  // harvest if possible
-  if (p.matured) {
-    inventory[p.seedName]++;
-    p.id = dirtId;
-    p.seedPosition = -1;
-    p.matured = false;
-  } else if (player.water) {
-    let remainingTime = p.growthTime - p.currentGrowth;
-    p.currentGrowth += remainingTime / 2;
-    player.water = false;
-  }
-}
-
 class Plant {
   constructor(x, y, id) {
     this.arrayX = x;
@@ -69,12 +40,36 @@ class Plant {
     this.currentGrowth++;
     if (this.seedPosition != -1) {
       drawTile(dirtId, this.arrayY * tileSize, this.arrayX * tileSize);
-      text(
-        "growthTime left: " + (this.growthTime - this.currentGrowth),
-        this.arrayY * tileSize,
-        this.arrayX * tileSize
-      );
     }
     drawTile(this.id, this.arrayY * tileSize, this.arrayX * tileSize);
+  }
+}
+
+function getPlant(screenX, screenY) {
+  let arrayX = int(screenX / tileSize);
+  let arrayY = int(screenY / tileSize);
+  let p = plantWorld[arrayY][arrayX];
+  return p;
+}
+
+function setPlant(screenX, screenY) {
+  let p = getPlant(screenX, screenY);
+  if (p.id == dirtId) {
+    p.setSeed(player.currentSeed);
+  }
+}
+
+function checkPlant(screenX, screenY) {
+  let p = getPlant(screenX, screenY);
+  // harvest if possible
+  if (p.matured) {
+    inventory[p.seedName]++;
+    p.id = dirtId;
+    p.seedPosition = -1;
+    p.matured = false;
+  } else if (player.water) {
+    let remainingTime = p.growthTime - p.currentGrowth;
+    p.currentGrowth += remainingTime / 2;
+    player.water = false;
   }
 }

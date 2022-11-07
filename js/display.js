@@ -1,10 +1,9 @@
 let tileSize = 32;
 let dirtId = 12;
 
-// stove is 48 + 49
 let bkworld = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -65,7 +64,7 @@ let crops = {
   carrots: [5, 17, 29, 41, 53],
 };
 
-function drawbkworld() {
+function displayBackground() {
   for (let y = 0; y < bkworld.length; y++) {
     for (let x = 0; x < bkworld[y].length; x++) {
       let id = bkworld[y][x];
@@ -76,7 +75,7 @@ function drawbkworld() {
   drawWorld();
 }
 
-function setPlantWorld() {
+function setupPlantWorld() {
   for (let y = 0; y < world.length; y++) {
     let pCol = [];
     for (let x = 0; x < world[y].length; x++) {
@@ -168,4 +167,13 @@ function getState(screenX, screenY) {
   } else if (id > 5 && id != 49 && id != 51) {
     return "plant";
   }
+}
+
+function getTileAtPosition(screenX, screenY) {
+  let arrayX = int(screenX / tileSize);
+  let arrayY = int(screenY / tileSize);
+  if (plantWorld[arrayY][arrayX] != undefined) {
+    return plantWorld[arrayY][arrayX].id;
+  }
+  return -1;
 }

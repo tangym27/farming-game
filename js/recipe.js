@@ -1,5 +1,6 @@
+let recipes = [];
+
 class Recipe {
-  // ingredients will be an object like {pumpkin: 2, milk: 1}
   constructor(id, name, ingredients, price) {
     this.id = id;
     this.name = name;
@@ -31,8 +32,6 @@ class Recipe {
   }
 }
 
-let recipes = [];
-
 function setupRecipes() {
   let recipesData = {
     "baked potatoes": [8, { potatoes: 2 }, 8],
@@ -59,4 +58,15 @@ function getRecipe(name) {
     }
   }
   return false;
+}
+
+function displayRecipes() {
+  for (let i = 0; i < 4; i++) {
+    let r = recipes[i];
+    drawRecipe(r.id, 1, tileSize * i, 0.9);
+  }
+  for (let i = 0; i < 4; i++) {
+    let r = recipes[i + 4];
+    drawRecipe(r.id, tileSize * 7 + 3, tileSize * i, 0.9);
+  }
 }
