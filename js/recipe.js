@@ -1,6 +1,7 @@
 class Recipe {
   // ingredients will be an object like {pumpkin: 2, milk: 1}
-  constructor(name, ingredients, price) {
+  constructor(id, name, ingredients, price) {
+    this.id = id;
     this.name = name;
     this.ingredients = ingredients;
 
@@ -18,10 +19,15 @@ class Recipe {
   }
 
   cook(inventory) {
-    for (let i of this.ingredientList) {
-      inventory[i] -= this.ingredients[i];
+    if (cookOnStove(this)) {
+      for (let i of this.ingredientList) {
+        inventory[i] -= this.ingredients[i];
+      }
+      cant_bake.classList.add("hidden");
+      return true;
     }
-    profit += this.price;
+    cant_bake.classList.remove("hidden");
+    return false;
   }
 }
 
@@ -29,18 +35,18 @@ let recipes = [];
 
 function setupRecipes() {
   let recipesData = {
-    "baked potatoes": [{ potatoes: 2 }, 8],
-    "strawberry jam": [{ strawberries: 3 }, 10],
-    "sliced watermelons": [{ watermelons: 1 }, 5],
-    "salad": [{ lettuce: 1, carrots: 1, tomatoes: 9 }],
-    "kebabs": [{ carrots: 1, pumpkins: 1, watermelons: 11 }],
-    "sandwich": [{ potatoes: 2, lettuce: 1, tomatoes: 7 }],
-    "pumpkin pie": [{ potatoes: 2, pumpkins: 18 }],
-    "carrot cake": [{ potatoes: 2, carrots: 20 }]
+    "baked potatoes": [8, { potatoes: 2 }, 8],
+    "strawberry jam": [14, { strawberries: 3 }, 10],
+    "sliced watermelons": [0, { watermelons: 1 }, 5],
+    salad: [10, { lettuce: 1, carrots: 1, tomatoes: 1 }, 9],
+    kebabs: [12, { carrots: 1, pumpkins: 1, watermelons: 1 }, 11],
+    sandwich: [13, { potatoes: 2, lettuce: 1, tomatoes: 1 }, 7],
+    "pumpkin pie": [1, { potatoes: 2, pumpkins: 1 }, 18],
+    "carrot cake": [2, { potatoes: 2, carrots: 2 }, 18],
   };
 
   for (const [key, value] of Object.entries(recipesData)) {
-    let recipe = new Recipe(key, value[0], value[1]);
+    let recipe = new Recipe(value[0], key, value[1], value[2]);
     recipes.push(recipe);
   }
 }

@@ -4,19 +4,22 @@ let canvas;
 const seed_panel = document.getElementById("seed_panel");
 const recipe_book = document.getElementById("recipe_book");
 const cant_cook = document.getElementById("cant_cook");
+const cant_bake = document.getElementById("cant_bake");
+
 const seeds = document.getElementById("seeds");
 const tools = document.getElementById("tools");
 
-// Farming Variables
+// Artwork Variables
 let tilesetArtwork;
 let cropsArtwork;
+let foodArtwork;
 
 let profit = 0;
 
 let recipeName, canCook;
 
 let inventory = {
-  potatoes: 0,
+  potatoes: 10,
   tomatoes: 0,
   lettuce: 0,
   carrots: 0,
@@ -29,6 +32,8 @@ let player, recipe;
 let playerId = 4;
 function preload() {
   tilesetArtwork = loadImage("images/fullTileset.png");
+  characterArtwork = loadImage("images/character.png");
+  foodArtwork = loadImage("images/food.png");
 }
 
 function setup() {
@@ -40,6 +45,7 @@ function setup() {
   player = new Player(width / 2, height / 2);
   setupRecipes();
   setPlantWorld();
+  setupStoves();
 }
 
 function draw() {
@@ -52,6 +58,7 @@ function draw() {
 
   fill(0);
   textSize(13);
+  stoveDisplay();
   // text("growing : " + player.currentSeed, 10, 15);
   //
   // text("potatoes: " + inventory["potatoes"], 10, 30);
@@ -91,11 +98,15 @@ function draw() {
 function cook(recipeNa) {
   let recipe = getRecipe(recipeNa);
   recipeName = recipeNa;
+  console.log(recipe);
   canCook = recipe.canCook(inventory);
   if (canCook) {
-    recipe.cook(inventory);
+    let canBake = recipe.cook(inventory);
     cant_cook.classList.add("hidden");
-    recipe_book.classList.add("hidden");
+    console.log(canBake);
+    if (canBake) {
+      recipe_book.classList.add("hidden");
+    }
   } else {
     cant_cook.classList.remove("hidden");
     return;
@@ -129,14 +140,14 @@ function keyPressed() {
       seed_panel.classList.add("hidden");
     }
   }
+}
 
-  if (key == "o") {
-    if (recipe_book.classList.contains("hidden")) {
-      recipe_book.classList.remove("hidden");
-      seed_panel.classList.add("hidden");
-    } else {
-      recipe_book.classList.add("hidden");
-      cant_cook.classList.add("hidden");
-    }
+function openMenu() {
+  if (recipe_book.classList.contains("hidden")) {
+    recipe_book.classList.remove("hidden");
+    seed_panel.classList.add("hidden");
+  } else {
+    recipe_book.classList.add("hidden");
+    cant_cook.classList.add("hidden");
   }
 }

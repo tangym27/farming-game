@@ -32,7 +32,7 @@ class Plant {
     this.arrayX = x;
     this.arrayY = y;
     this.graphic = "";
-    this.growthTime = 500;
+    this.growthTime = 50;
     this.currentGrowth = this.growthTime + 1;
     this.id = id;
     this.matured = false;
@@ -69,11 +69,11 @@ class Plant {
     this.currentGrowth++;
     if (this.seedPosition != -1) {
       drawTile(dirtId, this.arrayY * tileSize, this.arrayX * tileSize);
-      // text(
-      //   "growthTime left: " + (this.growthTime - this.currentGrowth),
-      //   this.arrayY * tileSize,
-      //   this.arrayX * tileSize
-      // );
+      text(
+        "growthTime left: " + (this.growthTime - this.currentGrowth),
+        this.arrayY * tileSize,
+        this.arrayX * tileSize
+      );
     }
     drawTile(this.id, this.arrayY * tileSize, this.arrayX * tileSize);
   }
