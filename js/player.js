@@ -1,3 +1,8 @@
+// Player Variables
+let player;
+let playerId = 4;
+let profit = 0;
+
 class Player {
   constructor(x, y) {
     this.x = x;
@@ -157,4 +162,9 @@ class Player {
       recipe_book.classList.add("hidden");
     }
   }
+}
+
+function setPlayerSeed(seed) {
+  player.currentSeed = seed;
+  seed_panel.classList.add("hidden");
 }

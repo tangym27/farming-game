@@ -19,6 +19,7 @@ class Stove {
   turnOff() {
     this.on = false;
     this.id = 48;
+
     profit += this.recipe.price;
   }
 
@@ -35,13 +36,13 @@ class Stove {
 }
 
 function setupStoves() {
-  for (let x = 2; x < 6; x++) {
+  for (let x = 2; x < 5; x++) {
     let temp = new Stove(x, 2);
     stoves.push(temp);
   }
 }
 
-function stoveDisplay() {
+function displayStoves() {
   for (stove of stoves) {
     drawTile(stove.id, stove.x * tileSize, stove.y * tileSize);
     if (stove.on) {
