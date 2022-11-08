@@ -8,7 +8,8 @@ const cant_bake = document.getElementById("cant_bake");
 const seeds = document.getElementById("seeds");
 
 // Artwork Variables
-let tilesetArtwork, cropsArtwork, foodArtwork;
+let tilesetArtwork, cropsArtwork, foodArtwork, cloud, cowPic, milkPic, poopPic, bucketPic;
+let gameState, cowGameState;
 
 // Recipe Variables
 let recipe, recipeName, canCook;
@@ -28,6 +29,11 @@ function preload() {
   tilesetArtwork = loadImage("images/fullTileset.png");
   characterArtwork = loadImage("images/character.png");
   foodArtwork = loadImage("images/food.png");
+  cloud = loadImage("images/cloud.png");
+  cowPic = loadImage("images/cow.png");
+  milkPic = loadImage("images/milk.png");
+  poopPic = loadImage("images/poop.png");
+  bucketPic = loadImage("images/bucket.png");
 }
 
 function setup() {
@@ -37,18 +43,45 @@ function setup() {
 
   // create our player
   player = new Player(width / 2, height / 2);
+
   setupRecipes();
   setupPlantWorld();
   setupStoves();
+
+  //setting up cowGame
+  cowGameState = false;
+  myCow = new Cow(10, 10);
+  myBucket = new Bucket(300,580);
+
+
+  gameState = "farming";
 }
 
 function draw() {
-  displayBackground();
+    if (gameState == "farming"){
+        displayBackground();
+        player.moveAndDisplay();
+        displayRecipes();
+        displayStoves();
+        displayInventory();
+        if (keyIsDown(67)){
+            gameState = "cowGame";
+        }
 
-  player.moveAndDisplay();
-  displayRecipes();
-  displayStoves();
-  displayInventory();
+    }
+    if (gameState == "cowGame"){
+        image(cloud,0,0);
+        cowGameStart();
+    }
+    if (gameState == "endCowGame"){
+        background(0);
+        fill(255);
+        text("You've collected "+ milkPoint+ " bottles of milk. Press SPACE to return to farming.", 20, 20);
+        if (keyIsDown(32)){
+            gameState = "farming";
+        }
+    }
+
 }
 
 function displayInventory() {
