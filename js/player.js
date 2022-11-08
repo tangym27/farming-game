@@ -4,15 +4,19 @@ let playerId = 4;
 let profit = 0;
 
 class Player {
+  // Players have a default speed, do not carry a water can, and will grow potatoes
   constructor(x, y) {
     this.x = x;
     this.y = y;
     this.speed = 5;
     this.water = false;
     this.currentSeed = "potatoes";
+    // Character tileset has three images in each direction.
+    // Offset allows us to fluctuate between all three to mimic the animation of walking
     this.graphicOffset = 0;
   }
 
+  // Code from class - finds surround X and Y points
   computeSensors() {
     this.middleX = int(this.x + tileSize / 2);
     this.middleY = int(this.y + tileSize / 2);
@@ -22,13 +26,13 @@ class Player {
     this.down = int(this.y + tileSize + 2);
   }
 
-  plant() {
+  // Based on which way the player faces and the id/value of the tile, act accordingly
+  process() {
     this.computeSensors();
 
     switch (this.direction) {
       case "up":
-        let state = getState(this.middleX, this.up);
-        switch (state) {
+        switch (getState(this.middleX, this.up)) {
           case "dirt":
             setPlant(this.middleX, this.up);
             break;
@@ -118,6 +122,7 @@ class Player {
       ) {
         this.x += this.speed;
       }
+      // Fluctuate between the three up images to mimic animation
       this.graphic = [1, 5, 9][this.graphicOffset];
       this.direction = "right";
     }
@@ -156,14 +161,17 @@ class Player {
     if (this.graphicOffset == 3) {
       this.graphicOffset = 0;
     }
+
     drawPlayer(this.graphic, this.x, this.y);
 
+    // Close recipe book when out of range of the stoves
     if (this.y < 80 || this.y > 110 || this.x < 60 || this.x > 180) {
       recipe_book.classList.add("hidden");
     }
   }
 }
 
+// From the HTML buttons, update what a player grows
 function setPlayerSeed(seed) {
   player.currentSeed = seed;
   seed_panel.classList.add("hidden");

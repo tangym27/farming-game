@@ -1,7 +1,8 @@
+// Display-related constants frequently used
 let tileSize = 32;
 let dirtId = 12;
 
-// stove is 48 + 49
+// background layer - all grass
 let bkworld = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -30,6 +31,7 @@ let bkworld = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
+// middle layer - dirt, water, fences, etc.
 let world = [
   [37, 3, 3, 3, 3, 3, 3, 37, 36, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
   [37, 3, 38, 38, 38, 38, 3, 37, 36, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
@@ -53,8 +55,10 @@ let world = [
   [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
 ];
 
+// dynamic layer - growing seed, plants, etc.
 let plantWorld = [];
 
+// from cropsArtwork, all the id of a growing crop
 let crops = {
   potatoes: [11, 23, 35, 47, 59],
   strawberries: [10, 22, 34, 46, 58],
@@ -65,6 +69,7 @@ let crops = {
   carrots: [5, 17, 29, 41, 53],
 };
 
+// draw background
 function displayBackground() {
   for (let y = 0; y < bkworld.length; y++) {
     for (let x = 0; x < bkworld[y].length; x++) {
@@ -76,12 +81,13 @@ function displayBackground() {
   drawWorld();
 }
 
+// fills dynamic array with plant objects
 function setupPlantWorld() {
   for (let y = 0; y < world.length; y++) {
     let pCol = [];
     for (let x = 0; x < world[y].length; x++) {
       let id = world[y][x];
-
+      // creating plant object to be able to update graphics for plants easily
       let p = new Plant(y, x, id);
       pCol.push(p);
     }
@@ -89,6 +95,7 @@ function setupPlantWorld() {
   }
 }
 
+// draws world with dynamic plant objects
 function drawWorld() {
   for (let y = 0; y < plantWorld.length; y++) {
     for (let x = 0; x < plantWorld[y].length; x++) {
@@ -98,6 +105,7 @@ function drawWorld() {
   }
 }
 
+// drawing using the main tileset (background designs)
 function drawTile(id, screenX, screenY) {
   let tilesPerRow = int(tilesetArtwork.width / tileSize);
   let imageX = int(id % tilesPerRow) * tileSize;
@@ -116,6 +124,7 @@ function drawTile(id, screenX, screenY) {
   );
 }
 
+// drawing using the character tileset (all directions and mvmt of a player)
 function drawPlayer(id, screenX, screenY) {
   let tilesPerRow = int(characterArtwork.width / tileSize);
   let imageX = int(id % tilesPerRow) * tileSize;
@@ -134,6 +143,7 @@ function drawPlayer(id, screenX, screenY) {
   );
 }
 
+// drawing using the food tileset (progress represents how big the image is)
 function drawRecipe(id, screenX, screenY, progress) {
   let tilesPerRow = int(foodArtwork.width / tileSize);
   let imageX = int(id % tilesPerRow) * tileSize;
@@ -152,8 +162,9 @@ function drawRecipe(id, screenX, screenY, progress) {
   );
 }
 
+// returns the program meaning behind an id
 function getState(screenX, screenY) {
-  id = getTileAtPosition(screenX, screenY);
+  let id = getTileAtPosition(screenX, screenY);
 
   if (id == 3) {
     return "walk";
@@ -170,6 +181,7 @@ function getState(screenX, screenY) {
   }
 }
 
+// returns the tile id given a position on the screen
 function getTileAtPosition(screenX, screenY) {
   let arrayX = int(screenX / tileSize);
   let arrayY = int(screenY / tileSize);
