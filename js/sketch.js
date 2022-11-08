@@ -6,9 +6,6 @@ const recipe_book = document.getElementById("recipe_book");
 const cant_cook = document.getElementById("cant_cook");
 const cant_bake = document.getElementById("cant_bake");
 
-const seeds = document.getElementById("seeds");
-const tools = document.getElementById("tools");
-
 // Artwork Variables
 let tilesetArtwork;
 let cropsArtwork;
@@ -26,6 +23,7 @@ let inventory = {
   strawberries: 0,
   watermelons: 0,
   pumpkins: 0,
+  milk: 0
 };
 
 let player, recipe;
@@ -83,6 +81,8 @@ function draw() {
     inventory["watermelons"];
   document.getElementById("pumpkin_inventory").innerHTML =
     inventory["pumpkins"];
+  document.getElementById("milk_inventory").innerHTML =
+    inventory["milk"];
 
   if (player.water) {
     document.getElementById("watering_can").innerHTML = "full";
@@ -90,6 +90,7 @@ function draw() {
     document.getElementById("watering_can").innerHTML = "empty";
   }
   document.getElementById("profit").innerHTML = "$" + profit;
+  document.getElementById("current_seed").innerHTML = player.currentSeed;
 
   // console.log(frameRate());
 }
@@ -106,9 +107,11 @@ function cook(recipeNa) {
     console.log(canBake);
     if (canBake) {
       recipe_book.classList.add("hidden");
+      cant_bake.classList.add("hidden");
     }
   } else {
     cant_cook.classList.remove("hidden");
+    cant_bake.classList.add("hidden");
     return;
   }
 }

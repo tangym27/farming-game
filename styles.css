@@ -8,9 +8,22 @@ h1 {
   font-size: 1.5em;
 }
 
+#inventory > h2 {
+  font-size: 1em;
+  margin: 5px;
+}
+
+#inventory > p {
+	font-size: 0.9em;
+}
+
 #game_and_inventory {
   display: flex;
   flex-direction: row;
+}
+
+#game {
+	position: relative;
 }
 
 #canvas {
@@ -18,28 +31,30 @@ h1 {
   z-index: -1;
 }
 
+#seed_panel, #recipe_book, #inventory {
+	background-color: #c8a480ed;
+	box-sizing: border-box;
+	border-radius: 16px;
+}
+
 #seed_panel {
   position: absolute;
   z-index: 1;
-  left: 80px;
-  top: 260px;
-  background-color: sandybrown;
+  left: 30px;
+  top: 200px;
   width: 580px;
-  height: 320px;
-  padding: 10px;
-  box-sizing: border-box;
+  height: 240px;
+  padding: 15px;
 }
 
 #recipe_book {
   position: absolute;
   z-index: 2;
-  left: 80px;
-  top: 260px;
-  background-color: sandybrown;
-  width: 580px;
+  left: 20px;
+  top: 90px;
+  width: 600px;
   height: 460px;
-  padding: 10px;
-  box-sizing: border-box;
+  padding: 15px;
 }
 
 #inventory {
@@ -47,9 +62,10 @@ h1 {
   display: flex;
   flex-direction: column;
   width: 320px;
-  background: sandybrown;
   margin: 10px;
-  padding-left: 10px;
+  padding-left: 15px;
+  padding-right: 10px;
+  padding-top: 15px;
 }
 
 .inventory_item {
@@ -59,13 +75,14 @@ h1 {
   margin-bottom: 5px;
 }
 
-h2 {
-  font-size: 1.2em;
-}
-
 .inventory_item > img {
   margin-left: 5px;
   margin-right: 10px;
+}
+
+.inventory_item > p {
+	margin-top: 10px;
+	margin-left: 5px;
 }
 
 #seed_buttons,
@@ -74,12 +91,19 @@ h2 {
   flex-direction: row;
 }
 
-.seed_item,
 .recipe_item {
   display: flex;
   flex-direction: column;
   padding: 5px;
-  width: 130px;
+  width: 23%;
+  font-size: 0.9em;
+}
+
+.seed_item {
+	width: 13.33%;
+	font-size: 0.8em;
+	padding: 5px;
+	text-align: center;
 }
 
 .seed_button,
@@ -89,10 +113,13 @@ h2 {
 }
 
 .seed_button:hover,
-.seed_button:active,
-.recipe_button:hover,
-.recipe_button:active {
+.recipe_button:hover {
   border: 2px solid green;
+}
+
+.recipe_name {
+	font-weight: bold;
+	font-size: 1em;
 }
 
 #cant_cook,

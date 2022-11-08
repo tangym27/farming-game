@@ -36,8 +36,8 @@
                   type="image"
                   name="grow_potato"
                   src="images/inventory_potato.png"
-                  width="32"
-                  height="32"
+                  width="40"
+                  height="40"
                   alt="potato, click to grow potatoes"
                   onclick="setPlayerSeed('potatoes');"
                 />
@@ -49,9 +49,9 @@
                   type="image"
                   name="grow_potato"
                   src="images/inventory_tomato.png"
-                  width="32"
-                  height="32"
-                  alt="totato, click to grow tomatoes"
+                  width="40"
+                  height="40"
+                  alt="tomato, click to grow tomatoes"
                   onclick="setPlayerSeed('tomatoes');"
                 />
                 <p>Tomatoes</p>
@@ -62,8 +62,8 @@
                   type="image"
                   name="grow_lettuce"
                   src="images/inventory_lettuce.png"
-                  width="32"
-                  height="32"
+                  width="40"
+                  height="40"
                   alt="lettuce, click to grow lettuce"
                   onclick="setPlayerSeed('lettuce');"
                 />
@@ -75,8 +75,8 @@
                   type="image"
                   name="grow_carrot"
                   src="images/inventory_carrot.png"
-                  width="32"
-                  height="32"
+                  width="40"
+                  height="40"
                   alt="carrot, click to grow carrots"
                   onclick="setPlayerSeed('carrots');"
                 />
@@ -88,8 +88,8 @@
                   type="image"
                   name="grow_strawberry"
                   src="images/inventory_strawberry.png"
-                  width="32"
-                  height="32"
+                  width="40"
+                  height="40"
                   alt="strawberry, click to grow strawberries"
                   onclick="setPlayerSeed('strawberries');"
                 />
@@ -101,8 +101,8 @@
                   type="image"
                   name="grow_watermelon"
                   src="images/inventory_watermelon.png"
-                  width="32"
-                  height="32"
+                  width="40"
+                  height="40"
                   alt="watermelon, click to grow watermelons"
                   onclick="setPlayerSeed('watermelons');"
                 />
@@ -114,8 +114,8 @@
                   type="image"
                   name="grow_pumpkin"
                   src="images/inventory_pumpkin.png"
-                  width="32"
-                  height="32"
+                  width="40"
+                  height="40"
                   alt="pumpkin, click to grow pumpkins"
                   onclick="setPlayerSeed('pumpkins');"
                 />
@@ -130,96 +130,73 @@
             <p>Click the image for the recipe you want to cook.</p>
             <div class="recipe_buttons">
               <div class="recipe_item">
-                <button onclick="cook('baked potatoes');">
-                  baked potatoes
-                </button>
-                <!-- <input class="recipe_button" type="image" src="#" width="32" height="32" alt="click to cook baked potatoes" onclick="cook('baked potatoes');">  -->
+                <input class="recipe_button" type="image" src="images/rb_bakedpotato.png" width="50" height="50" alt="click to cook baked potatoes" onclick="cook('baked potatoes');"> 
                 <p>
-                  Baked Potatoes ($8):<br />
-                  2 potatoes
+                  <span class="recipe_name">Baked Potatoes ($8):</span><br />2 potatoes
                 </p>
               </div>
               <div class="recipe_item">
-                <button onclick="cook('strawberry jam');">
-                  strawberry jam
-                </button>
-                <!-- <input class="recipe_button" type="image" src="#" width="32" height="32" alt="click to cook strawberry jam" onclick="cook('strawberry jam');">  -->
+                <input class="recipe_button" type="image" src="images/rb_strawberryjam.png" width="50" height="50" alt="click to cook strawberry jam" onclick="cook('strawberry jam');"> 
                 <p>
-                  Strawberry Jam ($10):<br />
+                  <span class="recipe_name">Strawberry Jam ($10):</span><br />
                   3 strawberries
                 </p>
               </div>
               <div class="recipe_item">
-                <button onclick="cook('sliced watermelons');">
-                  sliced watermelons
-                </button>
-                <!-- <input class="recipe_button" type="image" src="#" width="32" height="32" alt="click to cook sliced watermelons" onclick="cook('sliced watermelons');">  -->
+                <input class="recipe_button" type="image" src="images/rb_watermelon.png" width="50" height="50" alt="click to cook sliced watermelons" onclick="cook('sliced watermelons');"> 
                 <p>
-                  Sliced Watermelons ($5):<br />
+                  <span class="recipe_name">Sliced Watermelons ($5):</span><br />
                   1 watermelon
                 </p>
               </div>
               <div class="recipe_item">
-                <button onclick="cook('salad');">
-                  salad
-                </button>
-                <!-- <input class="recipe_button" type="image" src="#" width="32" height="32" alt="click to cook salad" onclick="cook('salad');">  -->
-                <p>
-                  Salad ($5):<br />
+                <input class="recipe_button" type="image" src="images/rb_salad.png" width="50" height="50" alt="click to cook salad" onclick="cook('salad');"> 
+                <p><span class="recipe_name">
+                  Salad ($9):</span><br />
                   1 tomatoes,<br />
-                  1 lettuce,<br />
-                  1 carrot
+                  1 lettuce, 1 carrot
                 </p>
               </div>
             </div>
 
             <div class="recipe_buttons">
               <div class="recipe_item">
-                <button onclick="cook('kebabs');">
-                  kebabs
-                </button>
-                <!-- <input class="recipe_button" type="image" src="#" width="32" height="32" alt="click to cook kebabs" onclick="cook('kebabs');">  -->
-                <p>
-                  Kebabs ($11):<br />
+                <input class="recipe_button" type="image" src="images/rb_kebab.png" width="50" height="50" alt="click to cook kebabs" onclick="cook('kebabs');"> 
+                <p><span class="recipe_name">
+                  Kebabs ($11):</span><br />
                   1 carrot,<br />
                   1 watermelons,<br />
                   1 pumpkin
                 </p>
               </div>
               <div class="recipe_item">
-                <button onclick="cook('sandwich');">
-                  sandwich
-                </button>
-                <!-- <input class="recipe_button" type="image" src="#" width="32" height="32" alt="click to cook sandwich" onclick="cook('sandwich');">  -->
-                <p>
-                  Sandwich ($7):<br />
+                <input class="recipe_button" type="image" src="images/rb_sandwich.png" width="50" height="50" alt="click to cook sandwich" onclick="cook('sandwich');"> 
+                <p><span class="recipe_name">
+                  Sandwich ($7):</span><br />
                   2 potatoes,<br />
                   1 tomatoes,<br />
-                  1 lettuce
+                  1 lettuce, 1 milk
                 </p>
               </div>
               <div class="recipe_item">
-                <button onclick="cook('pumpkin pie');">
-                  pumpkin pie
-                </button>
-                <!-- <input class="recipe_button" type="image" src="#" width="32" height="32" alt="click to cook pumpkin pie" onclick="cook('pumpkin pie');">  -->
-                <p>
-                  Pumpkin Pie ($18):<br />
+                <input class="recipe_button" type="image" src="images/rb_pumpkinpie.png" width="50" height="50" alt="click to cook pumpkin pie" onclick="cook('pumpkin pie');"> 
+                <p><span class="recipe_name">
+                  Pumpkin Pie ($18):</span><br />
                   2 potatoes,<br />
-                  1 pumpkins
+                  1 pumpkins, <br>
+                  1 milk
                 </p>
               </div>
               <div class="recipe_item">
-                <button onclick="cook('carrot cake');">
-                  carrot cake
-                </button>
-                <!-- <input class="recipe_button" type="image" src="#" width="32" height="32" alt="click to cook carrot cake" onclick="cook('carrot cake');">  -->
-                <p>
-                  Carrot Cake ($18): <br />
+                <input class="recipe_button" type="image" src="images/rb_carrotcake.png" width="50" height="50" alt="click to cook carrot cake" onclick="cook('carrot cake');"> 
+                <p><span class="recipe_name">
+                  Carrot Cake ($18): </span><br />
                   2 potatoes,<br />
-                  2 carrots
+                  2 carrots, <br>
+                  1 milk
                 </p>
               </div>
+              
             </div>
 
             <p id="cant_cook" class="hidden">
@@ -235,6 +212,8 @@
 
       <div id="inventory">
         <h2>Total Profit: <span id="profit"></span></h2>
+
+        <h2>Currently planting: <span id="current_seed"></span></h2>
 
         <h2>Watering Can is <span id="watering_can"></span>!</h2>
 
@@ -266,6 +245,10 @@
         <div class="inventory_item">
           <img src="images/inventory_pumpkin.png" width="32" height="32" />
           <p>Pumpkins: <span id="pumpkin_inventory"></span></p>
+        </div>
+        <div class="inventory_item">
+          <img src="images/inventory_milk.png" width="32" height="32" alt="milk icon"/>
+          <p>Milk: <span id="milk_inventory"></span></p>
         </div>
       </div>
     </div>
