@@ -5,16 +5,23 @@ const seed_panel = document.getElementById("seed_panel");
 const recipe_book = document.getElementById("recipe_book");
 const cant_cook = document.getElementById("cant_cook");
 const cant_bake = document.getElementById("cant_bake");
+const seeds = document.getElementById("seeds");
 
 // Artwork Variables
-let tilesetArtwork;
-let cropsArtwork;
-let foodArtwork;
+let tilesetArtwork,
+  cropsArtwork,
+  foodArtwork,
+  cloud,
+  cowPic,
+  milkPic,
+  poopPic,
+  bucketPic;
+let gameState, cowGameState;
 
-let profit = 0;
+// Recipe Variables
+let recipe, recipeName, canCook;
 
-let recipeName, canCook;
-
+// Player inventory - increases when harvesting and decreases when cooking
 let inventory = {
   potatoes: 10,
   tomatoes: 0,
@@ -23,15 +30,18 @@ let inventory = {
   strawberries: 0,
   watermelons: 0,
   pumpkins: 0,
-  milk: 0
+  milk: 0,
 };
 
-let player, recipe;
-let playerId = 4;
 function preload() {
   tilesetArtwork = loadImage("images/fullTileset.png");
   characterArtwork = loadImage("images/character.png");
   foodArtwork = loadImage("images/food.png");
+  cloud = loadImage("images/cloud.png");
+  cowPic = loadImage("images/cow.png");
+  milkPic = loadImage("images/milk.png");
+  poopPic = loadImage("images/poop.png");
+  bucketPic = loadImage("images/bucket.png");
 }
 
 function setup() {
@@ -41,35 +51,53 @@ function setup() {
 
   // create our player
   player = new Player(width / 2, height / 2);
+
+  // setup our configurations
   setupRecipes();
-  setPlantWorld();
+  setupPlantWorld();
   setupStoves();
+
+  //setting up cowGame
+  cowGameState = false;
+  myCow = new Cow(10, 10);
+  myBucket = new Bucket(300, 580);
+
+  gameState = "farming";
 }
 
 function draw() {
-  // draw the bkworld and the character
-  background(255);
-  drawbkworld();
+  if (gameState == "farming") {
+    displayBackground();
+    player.moveAndDisplay();
+    displayRecipes();
+    displayStoves();
+    displayInventory();
+    if (keyIsDown(67)) {
+      gameState = "cowGame";
+    }
+  }
+  if (gameState == "cowGame") {
+    image(cloud, 0, 0);
+    cowGameStart();
+  }
+  if (gameState == "endCowGame") {
+    background(0);
+    fill(255);
+    text(
+      "You've collected " +
+        milkPoint +
+        " bottles of milk. Press SPACE to return to farming.",
+      20,
+      20
+    );
+    if (keyIsDown(32)) {
+      gameState = "farming";
+    }
+  }
+}
 
-  // the character will always be drawn in the middle of the screen
-  player.moveAndDisplay();
-
-  fill(0);
-  textSize(13);
-  stoveDisplay();
-  // text("growing : " + player.currentSeed, 10, 15);
-  //
-  // text("potatoes: " + inventory["potatoes"], 10, 30);
-  // text("tomatoes: " + inventory["tomatoes"], 90, 30);
-  // text("lettuce: " + inventory["lettuce"], 200, 30);
-  // text("carrots: " + inventory["carrots"], 10, 40);
-  // text("strawberries: " + inventory["strawberries"], 90, 40);
-  // text("watermelons: " + inventory["watermelons"], 200, 40);
-  // text("pumpkin: " + inventory["pumpkins"], 10, 50);
-  // text("can you cook recipe name " + recipeName + " " + canCook, 10, 60);
-  // text("does player have water " + player.water, 10, 70);
-  // text("$$$ profit " + profit, 10, 80);
-
+// HTML interactions
+function displayInventory() {
   document.getElementById("potatoes_inventory").innerHTML =
     inventory["potatoes"];
   document.getElementById("tomato_inventory").innerHTML = inventory["tomatoes"];
@@ -81,8 +109,8 @@ function draw() {
     inventory["watermelons"];
   document.getElementById("pumpkin_inventory").innerHTML =
     inventory["pumpkins"];
-  document.getElementById("milk_inventory").innerHTML =
-    inventory["milk"];
+
+  // document.getElementById("milk_inventory").innerHTML = inventory["milk"];
 
   if (player.water) {
     document.getElementById("watering_can").innerHTML = "full";
@@ -90,49 +118,29 @@ function draw() {
     document.getElementById("watering_can").innerHTML = "empty";
   }
   document.getElementById("profit").innerHTML = "$" + profit;
-  document.getElementById("current_seed").innerHTML = player.currentSeed;
-
-  // console.log(frameRate());
 }
 
-// potatoes, tomatoes, lettuce, carrots, strawberries, watermelons, pumpkin;
-function cook(recipeNa) {
-  let recipe = getRecipe(recipeNa);
-  recipeName = recipeNa;
-  console.log(recipe);
+// From HTML button, check if something can be cooked based on inventory and stove availaibity
+function cook(tempRecipe) {
+  let recipe = getRecipe(tempRecipe);
+  recipeName = tempRecipe;
   canCook = recipe.canCook(inventory);
   if (canCook) {
     let canBake = recipe.cook(inventory);
     cant_cook.classList.add("hidden");
-    console.log(canBake);
     if (canBake) {
       recipe_book.classList.add("hidden");
-      cant_bake.classList.add("hidden");
     }
   } else {
     cant_cook.classList.remove("hidden");
-    cant_bake.classList.add("hidden");
     return;
   }
 }
 
-function setPlayerSeed(seed) {
-  player.currentSeed = seed;
-  seed_panel.classList.add("hidden");
-}
-
-function getTileAtPosition(screenX, screenY) {
-  let arrayX = int(screenX / tileSize);
-  let arrayY = int(screenY / tileSize);
-  if (plantWorld[arrayY][arrayX] != undefined) {
-    return plantWorld[arrayY][arrayX].id;
-  }
-  return -1;
-}
-
+// User interactions - space for most interactions and p to visit seeds
 function keyPressed() {
   if (key == " ") {
-    player.plant();
+    player.process();
   }
 
   if (key == "p") {
@@ -145,6 +153,7 @@ function keyPressed() {
   }
 }
 
+// Shows off recipe book
 function openMenu() {
   if (recipe_book.classList.contains("hidden")) {
     recipe_book.classList.remove("hidden");
