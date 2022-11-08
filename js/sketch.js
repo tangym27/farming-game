@@ -8,12 +8,20 @@ const cant_bake = document.getElementById("cant_bake");
 const seeds = document.getElementById("seeds");
 
 // Artwork Variables
-let tilesetArtwork, cropsArtwork, foodArtwork, cloud, cowPic, milkPic, poopPic, bucketPic;
+let tilesetArtwork,
+  cropsArtwork,
+  foodArtwork,
+  cloud,
+  cowPic,
+  milkPic,
+  poopPic,
+  bucketPic;
 let gameState, cowGameState;
 
 // Recipe Variables
 let recipe, recipeName, canCook;
 
+// Player inventory - increases when harvesting and decreases when cooking
 let inventory = {
   potatoes: 10,
   tomatoes: 0,
@@ -44,6 +52,7 @@ function setup() {
   // create our player
   player = new Player(width / 2, height / 2);
 
+  // setup our configurations
   setupRecipes();
   setupPlantWorld();
   setupStoves();
@@ -51,39 +60,43 @@ function setup() {
   //setting up cowGame
   cowGameState = false;
   myCow = new Cow(10, 10);
-  myBucket = new Bucket(300,580);
-
+  myBucket = new Bucket(300, 580);
 
   gameState = "farming";
 }
 
 function draw() {
-    if (gameState == "farming"){
-        displayBackground();
-        player.moveAndDisplay();
-        displayRecipes();
-        displayStoves();
-        displayInventory();
-        if (keyIsDown(67)){
-            gameState = "cowGame";
-        }
-
+  if (gameState == "farming") {
+    displayBackground();
+    player.moveAndDisplay();
+    displayRecipes();
+    displayStoves();
+    displayInventory();
+    if (keyIsDown(67)) {
+      gameState = "cowGame";
     }
-    if (gameState == "cowGame"){
-        image(cloud,0,0);
-        cowGameStart();
+  }
+  if (gameState == "cowGame") {
+    image(cloud, 0, 0);
+    cowGameStart();
+  }
+  if (gameState == "endCowGame") {
+    background(0);
+    fill(255);
+    text(
+      "You've collected " +
+        milkPoint +
+        " bottles of milk. Press SPACE to return to farming.",
+      20,
+      20
+    );
+    if (keyIsDown(32)) {
+      gameState = "farming";
     }
-    if (gameState == "endCowGame"){
-        background(0);
-        fill(255);
-        text("You've collected "+ milkPoint+ " bottles of milk. Press SPACE to return to farming.", 20, 20);
-        if (keyIsDown(32)){
-            gameState = "farming";
-        }
-    }
-
+  }
 }
 
+// HTML interactions
 function displayInventory() {
   document.getElementById("potatoes_inventory").innerHTML =
     inventory["potatoes"];
@@ -107,6 +120,7 @@ function displayInventory() {
   document.getElementById("profit").innerHTML = "$" + profit;
 }
 
+// From HTML button, check if something can be cooked based on inventory and stove availaibity
 function cook(tempRecipe) {
   let recipe = getRecipe(tempRecipe);
   recipeName = tempRecipe;
@@ -123,9 +137,10 @@ function cook(tempRecipe) {
   }
 }
 
+// User interactions - space for most interactions and p to visit seeds
 function keyPressed() {
   if (key == " ") {
-    player.plant();
+    player.process();
   }
 
   if (key == "p") {
@@ -138,6 +153,7 @@ function keyPressed() {
   }
 }
 
+// Shows off recipe book
 function openMenu() {
   if (recipe_book.classList.contains("hidden")) {
     recipe_book.classList.remove("hidden");

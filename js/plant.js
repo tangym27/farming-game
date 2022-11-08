@@ -2,15 +2,17 @@ class Plant {
   constructor(x, y, id) {
     this.arrayX = x;
     this.arrayY = y;
-    this.graphic = "";
+    // plants will grow every x frames
     this.growthTime = 50;
     this.currentGrowth = this.growthTime + 1;
     this.id = id;
+    // tracks plant growing lifespan
     this.matured = false;
     this.seedPosition = -1;
   }
 
   setId(id) {
+    // seeds only have 4 stages, at that point mark as matured
     if (this.seedPosition >= 4) {
       this.matured = true;
     } else {
@@ -18,12 +20,14 @@ class Plant {
     }
   }
 
+  // setup to start growing including saving the seed and growing
   setSeed(id) {
     this.seedName = player.currentSeed;
     this.grow();
     this.currentGrowth = 0;
   }
 
+  // update seed position and id/graphic based on growthTime
   grow() {
     this.seedPosition++;
     this.setId(crops[this.seedName][this.seedPosition]);
@@ -45,6 +49,7 @@ class Plant {
   }
 }
 
+// returns the plant object at a given position
 function getPlant(screenX, screenY) {
   let arrayX = int(screenX / tileSize);
   let arrayY = int(screenY / tileSize);
@@ -52,6 +57,7 @@ function getPlant(screenX, screenY) {
   return p;
 }
 
+// plants a seed if possible (checks if there is only dirt)
 function setPlant(screenX, screenY) {
   let p = getPlant(screenX, screenY);
   if (p.id == dirtId) {
@@ -59,15 +65,17 @@ function setPlant(screenX, screenY) {
   }
 }
 
+// interactions with a plant - harvesting/water
 function checkPlant(screenX, screenY) {
   let p = getPlant(screenX, screenY);
-  // harvest if possible
+  // harvest if possible - reset plant stats as well
   if (p.matured) {
     inventory[p.seedName]++;
     p.id = dirtId;
     p.seedPosition = -1;
     p.matured = false;
   } else if (player.water) {
+    // water reduces remaining growth time by half
     let remainingTime = p.growthTime - p.currentGrowth;
     p.currentGrowth += remainingTime / 2;
     player.water = false;

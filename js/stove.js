@@ -1,6 +1,8 @@
+// Track all available stoves in an array of Stove objects
 let stoves = [];
 
 class Stove {
+  // constructor for Stove object with progress tracking how cooked something is
   constructor(x, y) {
     this.on = false;
     this.id = 48;
@@ -9,6 +11,7 @@ class Stove {
     this.progress = 0.5;
   }
 
+  // cooks a recipe and marks the stove as used
   cook(recipe) {
     this.on = true;
     this.id = 49;
@@ -16,6 +19,7 @@ class Stove {
     this.progress = 0.5;
   }
 
+  // Reset stove settings
   turnOff() {
     this.on = false;
     this.id = 48;
@@ -23,6 +27,7 @@ class Stove {
     profit += this.recipe.price;
   }
 
+  // Show development of cooking
   displayCookingProgress() {
     drawRecipe(
       this.recipe.id,
@@ -35,6 +40,7 @@ class Stove {
   }
 }
 
+// Configure stoves setup
 function setupStoves() {
   for (let x = 2; x < 5; x++) {
     let temp = new Stove(x, 2);
@@ -42,6 +48,7 @@ function setupStoves() {
   }
 }
 
+// Show off the stoves
 function displayStoves() {
   for (stove of stoves) {
     drawTile(stove.id, stove.x * tileSize, stove.y * tileSize);
@@ -51,6 +58,7 @@ function displayStoves() {
   }
 }
 
+// Allow for cokoking based on recipe
 function cookOnStove(recipe) {
   let stoveNum = constrain(int(player.x / 32) - 1, 0, stoves.length - 1);
 
