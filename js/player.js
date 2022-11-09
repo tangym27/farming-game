@@ -50,8 +50,9 @@ class Player {
             break;
           case "cow":
             gameState = "cowGame";
-            player.x = width / 2;
-            player.y = height / 2;
+            player.y = player.y+tileSize;
+            this.graphic = [0, 4, 8][this.graphicOffset];
+            this.direction = "down";
             break;
         }
         break;
@@ -74,8 +75,9 @@ class Player {
             break;
           case "cow":
             gameState = "cowGame";
-            player.x = width / 2;
-            player.y = height / 2;
+            player.y = player.y-tileSize;
+            this.graphic = [2, 6, 10][this.graphicOffset];
+            this.direction = "up";
             break;
         }
         break;
@@ -98,8 +100,10 @@ class Player {
             break;
           case "cow":
             gameState = "cowGame";
-            player.x = width / 2;
-            player.y = height / 2;
+            player.x = player.x-tileSize;
+            this.graphic = [3, 7, 11][this.graphicOffset];
+            this.direction = "left";
+            cowGameState = true;
             break;
         }
         break;
@@ -122,8 +126,9 @@ class Player {
             break;
           case "cow":
             gameState = "cowGame";
-            player.x = width / 2;
-            player.y = height / 2;
+            player.x = player.x-5;
+            this.graphic = [3, 7, 11][this.graphicOffset];
+            this.direction = "left";
             break;
         }
         break;

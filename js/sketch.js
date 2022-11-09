@@ -16,7 +16,18 @@ let tilesetArtwork,
   milkPic,
   poopPic,
   bucketPic;
-let gameState, cowGameState, endCowGame;
+
+// Start Screen artwork variables
+let carrotPic, lettucePic, potatoPic, pumpkinPic, 
+  strawberryPic, tomatoPic, watermelonPic;
+let bakedPotatoPic, carrotCakePic, kebabPic, pumpkinPiePic, 
+  saladPic, sandwichPic, strawberryJamPic, slicedWatermelonPic;
+let startScreenObjects = [];
+let startScreenArt = [];
+
+// Game State variables
+let gameState, cowGameState;
+// gameState can be startScreen, farming, cowGame, endCowGame
 
 // Recipe Variables
 let recipe, recipeName, canCook;
@@ -27,6 +38,12 @@ let achievement2 = false;
 let achievement3 = false;
 let achievement4 = false;
 const cookedSet = new Set();
+
+// cow game variables
+let myCow;
+let milks = [];
+let poops = [];
+let myBucket;
 
 // Player inventory - increases when harvesting and decreases when cooking
 let inventory = {
@@ -49,6 +66,34 @@ function preload() {
   milkPic = loadImage("images/milk.png");
   poopPic = loadImage("images/poop.png");
   bucketPic = loadImage("images/bucket.png");
+
+  // start screen images
+  carrotPic = loadImage("images/inventory_carrot.png");
+  lettucePic = loadImage("images/inventory_lettuce.png");
+  potatoPic = loadImage("images/inventory_potato.png");
+  pumpkinPic = loadImage("images/inventory_pumpkin.png");
+  strawberryPic = loadImage("images/inventory_strawberry.png");
+  tomatoPic = loadImage("images/inventory_tomato.png");
+  watermelonPic = loadImage("images/inventory_watermelon.png");
+
+  bakedPotatoPic = loadImage("images/rb_bakedpotato.png");
+  carrotCakePic = loadImage("images/rb_carrotcake.png");
+  kebabPic = loadImage("images/rb_kebab.png");
+  pumpkinPiePic = loadImage("images/rb_pumpkinpie.png");
+  saladPic = loadImage("images/rb_salad.png");
+  sandwichPic = loadImage("images/rb_sandwich.png");
+  strawberryJamPic = loadImage("images/rb_strawberryjam.png");
+  slicedWatermelonPic = loadImage("images/rb_watermelon.png");
+
+  startScreenArt = [
+    potatoPic, tomatoPic, lettucePic, carrotPic,
+    strawberryPic, watermelonPic, pumpkinPic, milkPic,
+    bakedPotatoPic, strawberryJamPic, slicedWatermelonPic, saladPic,
+    kebabPic, sandwichPic, pumpkinPiePic, carrotCakePic
+  ]
+
+  WebFont.load({
+    google: { families: ['Grandstander:400'] }});
 }
 
 function setup() {
@@ -64,22 +109,56 @@ function setup() {
   setupPlantWorld();
   setupStoves();
 
-  // setting up cowGame
+  // setting up cow game
   cowGameState = false;
   myCow = new Cow(10, 10);
   myBucket = new Bucket(300, 580);
+  for (let i = 0; i < 20; i++){
+      milks.push(new Milk());
+  }
+  for (let i = 0; i < 20; i++){
+      poops.push(new Poop());
+  }
 
-  gameState = "farming";
+  // set up start screen
+  for (let i=0; i<8; i++) {
+    startScreenObjects.push(new StartScreenFood(
+      50+(i*75), 120, startScreenArt[i], 
+      startScreenArt[i].width, startScreenArt[i].height));
+  }
+  for (let i=8; i<16; i++) {
+    startScreenObjects.push(new StartScreenFood(
+      40+((i-8)*72), 460, startScreenArt[i], 50, 50));
+  }
+  gameState = "startScreen";
+
 }
 
 function draw() {
-  if (gameState == "farming") {
+  if (gameState == "startScreen") {
+    background(169, 227, 255);
+
+    // text
+    fill(0);
+    textFont('Grandstander')
+    textSize(45);
+    text("The Recessionary Ranch", 65, 290);
+    textSize(25);
+    text("Click anywhere to begin farming!", 115, 350);
+
+    // jittering images
+    for (let i=0; i<startScreenObjects.length; i++) {
+      startScreenObjects[i].displayAndJitter();
+    }
+
+  } else if (gameState == "farming") {
     displayBackground();
-    player.moveAndDisplay();
     displayRecipes();
     displayStoves();
     displayInventory();
+    player.moveAndDisplay();
 
+    // achievement popup windows
     if (profit >= 10 && achievement1 == false) {
       document.getElementById("achievement1").classList.remove("hidden");
     }
@@ -97,24 +176,13 @@ function draw() {
     if (cookedSet.size == 8 && achievement4 == false) {
       document.getElementById("achievement4").classList.remove("hidden");
     }
-  }
-  if (gameState == "cowGame") {
+
+  } else if (gameState == "cowGame") {
     image(cloud, 0, 0);
     cowGameStart();
-  }
-  if (gameState == "endCowGame") {
-    background(0);
-    fill(255);
-    text(
-      "You've collected " +
-        milkPoint +
-        " bottles of milk. Press SPACE to return to farming.",
-      20,
-      20
-    );
-    if (keyIsDown(32)) {
-      gameState = "farming";
-    }
+
+  } else if (gameState == "endCowGame") {
+    cowGameEnd();
   }
 }
 
@@ -184,6 +252,15 @@ function keyPressed() {
   }
 }
 
+// Start Screen says "Click anywhere to begin" - 
+// change to "farming" game state and scroll to bottom of page
+function mousePressed() {
+  if (gameState=="startScreen") {
+    gameState = "farming";
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+}
+
 // Shows off recipe book
 function openMenu() {
   if (recipe_book.classList.contains("hidden")) {
@@ -213,5 +290,25 @@ function closeAchievement() {
   if (cookedSet.size >= 8) {
     document.getElementById("achievement4").classList.add("hidden");
     achievement4 = true;
+  }
+}
+
+class StartScreenFood {
+  constructor (x, y, pic, width, height) {
+    this.x = x;
+    this.y = y;
+    this.origX = x;
+    this.origY = y;
+    this.pic = pic;
+    this.width = width;
+    this.height = height;
+  }
+  displayAndJitter() {
+    image(this.pic, this.x, this.y, this.width, this.height);
+
+    this.x += random(-1,1);
+    this.y += random(-1,1);
+    this.x = constrain(this.x,this.origX-5,this.origX+5)
+    this.y = constrain(this.y,this.origY-5,this.origY+5);
   }
 }
