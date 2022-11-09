@@ -1,132 +1,169 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
-    <title>Midterm Farming Game</title>
-    <link rel="stylesheet" href="styles.css" />
-    <style></style>
-  </head>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
+  <title>Midterm Farming Game</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style></style>
+</head>
 
-  <body>
+<body>
+  <header>
     <h1>Farming Game</h1>
-    <p>
-      Temp Instructions: Press "p" to toggle the visibility of the seed popup
-      window and click on the image of the crop you want to grow. Press space in
-      front of an empty plot to plant, wait a bit for it to grow, and press
-      space again to harvest. Inventory is shown to the right of the game
-      screen. Press "o" to toggle the visibility of the recipe book and click on
-      the image of the recipe you want to cook. If you have enough ingredients
-      to cook the food, the food will cook automatically and be sold for its
-      listed cost.
-    </p>
+    <h2>Erin Choi, Tiffany (Thinzar) Lin, Michelle Tang</h2>
+  </header>
+
+  <main>
+    <div id="documentation">
+      <h2>About the Game</h2>
+      <p>Our farming game was inspired by calming, casual games with low-stakes farming and cooking mechanics, such as Stardew Valley, Smurfs' Village, and Cats & Soup. It is a much more simplified prototype of these games that focuses on using fundamental OOP principles for player movement and collision, planting/growing/harvesting ingredients, and cooking/collecting dishes based on fixed recipes.</p>
+      <p>In future development, we would hope to add localStorage to make the game playable over a longer period of time rather than playing in one sitting. This would allow users to play the game for an unlimited time as long as it is available on a server; the crop growth and cooking processes could occur over longer periods of time (several hours) to make the game feel more casual. </p>
+
+      <h2>Game Concept</h2>
+      <p>
+        You've stumbled upon the perfect plot of land for starting your own farm, complete with a bag of seeds, soil ready for cultivation, a watering can, a small pond, and a giant flying cow. There's even a kitchen with a recipe book that uses the crops you can grow! Make as much money as you can while you're here by growing and harvesting crops, then use them to cook dishes to sell!
+      </p>
+
+      <h2>How to Play</h2>
+      <p>Use the WASD keys on your keyboard to move. (W = up, A = left, S = down, D = right)</p>
+      <p>The status window to the right of the game screen can be used to track your total profit, what seed you're currently planting, whether your watering can is empty or full, and your ingredient inventory (how many of each ingredient you currently have).</p>
+
+      <div id="instructions_cols">
+        <div>
+          <h3>Planting, Growing, Harvesting Crops</h3>
+          <ul>
+            <li>Press P to toggle the pop-up window that shows you what seeds you can plant. Click the image of the ingredient you want to plant.</li>
+            <li>Walk up to a square of soil and press SPACE to plant a seed. Wait while the plant goes through 4 stages of growth - when it's fully matured and looks as it appears in the inventory or seed window, press SPACE in front of it to harvest it.</li>
+            <li>You can speed up the growth of your crops by watering them. Walk up to the pond and press SPACE to fill your watering can. Walk up to a plant and press SPACE to water it.</li>
+            <li>Plants can be watered as many times as you want until they're fully grown. However, your watering can is very small - you can only water one plant before it's empty again!</li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3>The Flying Cow Game: Obtaining Milk</h3>
+          <ul>
+            <li>Walk up to the white doors at the left of the game screen and press C to begin the minigame. The Flying Cow will immediately begin to produce milk and dung!</li>
+            <li>Use the A and D keys to move your bucket left and right.</li>
+            <li>Collect milk bottles while avoiding the cow dung. The game ends when you collect a maximum of 5 bottles of milk or collect dung.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Cooking and Selling Dishes</h3>
+          <ul>
+            <li>Walk up to a stove in the kitchen (at the top left of the game screen) and press SPACE to open the recipe book. Click the image of the recipe you want to cook.</li>
+            <li>If you have enough ingredients, the stove will turn brown to indicate it is being used. The dish will appear on the table behind the stove being used and slowly grow larger as it is being prepared.</li>
+            <li>The stove will return to its normal color when the dish is ready. Walk up to the table with the completed dish and press SPACE to sell it for its fixed cost (listed in the recipe book). Your total profit will be updated in the status window.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
     <div id="game_and_inventory">
       <div id="game">
         <div id="seed_panel" class="hidden">
           <div id="seeds">
-            <h2>Seeds:</h2>
-            <p>
-              Click the image for the ingredient you want to grow to select its
-              seed.
-            </p>
+            <h2>Seed Bag</h2>
+            <p>Click the image for the ingredient you want to grow to select its seed.</p>
             <div id="seed_buttons">
               <div class="seed_item">
                 <input
-                  class="seed_button"
-                  type="image"
-                  name="grow_potato"
-                  src="images/inventory_potato.png"
-                  width="40"
-                  height="40"
-                  alt="potato, click to grow potatoes"
-                  onclick="setPlayerSeed('potatoes');"
+                class="seed_button"
+                type="image"
+                name="grow_potato"
+                src="images/inventory_potato.png"
+                width="40"
+                height="40"
+                alt="potato, click to grow potatoes"
+                onclick="setPlayerSeed('potatoes');"
                 />
                 <p>Potatoes</p>
               </div>
               <div class="seed_item">
                 <input
-                  class="seed_button"
-                  type="image"
-                  name="grow_potato"
-                  src="images/inventory_tomato.png"
-                  width="40"
-                  height="40"
-                  alt="tomato, click to grow tomatoes"
-                  onclick="setPlayerSeed('tomatoes');"
+                class="seed_button"
+                type="image"
+                name="grow_potato"
+                src="images/inventory_tomato.png"
+                width="40"
+                height="40"
+                alt="tomato, click to grow tomatoes"
+                onclick="setPlayerSeed('tomatoes');"
                 />
                 <p>Tomatoes</p>
               </div>
               <div class="seed_item">
                 <input
-                  class="seed_button"
-                  type="image"
-                  name="grow_lettuce"
-                  src="images/inventory_lettuce.png"
-                  width="40"
-                  height="40"
-                  alt="lettuce, click to grow lettuce"
-                  onclick="setPlayerSeed('lettuce');"
+                class="seed_button"
+                type="image"
+                name="grow_lettuce"
+                src="images/inventory_lettuce.png"
+                width="40"
+                height="40"
+                alt="lettuce, click to grow lettuce"
+                onclick="setPlayerSeed('lettuce');"
                 />
                 <p>Lettuce</p>
               </div>
               <div class="seed_item">
                 <input
-                  class="seed_button"
-                  type="image"
-                  name="grow_carrot"
-                  src="images/inventory_carrot.png"
-                  width="40"
-                  height="40"
-                  alt="carrot, click to grow carrots"
-                  onclick="setPlayerSeed('carrots');"
+                class="seed_button"
+                type="image"
+                name="grow_carrot"
+                src="images/inventory_carrot.png"
+                width="40"
+                height="40"
+                alt="carrot, click to grow carrots"
+                onclick="setPlayerSeed('carrots');"
                 />
                 <p>Carrots</p>
               </div>
               <div class="seed_item">
                 <input
-                  class="seed_button"
-                  type="image"
-                  name="grow_strawberry"
-                  src="images/inventory_strawberry.png"
-                  width="40"
-                  height="40"
-                  alt="strawberry, click to grow strawberries"
-                  onclick="setPlayerSeed('strawberries');"
+                class="seed_button"
+                type="image"
+                name="grow_strawberry"
+                src="images/inventory_strawberry.png"
+                width="40"
+                height="40"
+                alt="strawberry, click to grow strawberries"
+                onclick="setPlayerSeed('strawberries');"
                 />
                 <p>Strawberries</p>
               </div>
               <div class="seed_item">
                 <input
-                  class="seed_button"
-                  type="image"
-                  name="grow_watermelon"
-                  src="images/inventory_watermelon.png"
-                  width="40"
-                  height="40"
-                  alt="watermelon, click to grow watermelons"
-                  onclick="setPlayerSeed('watermelons');"
+                class="seed_button"
+                type="image"
+                name="grow_watermelon"
+                src="images/inventory_watermelon.png"
+                width="40"
+                height="40"
+                alt="watermelon, click to grow watermelons"
+                onclick="setPlayerSeed('watermelons');"
                 />
                 <p>Watermelons</p>
               </div>
               <div class="seed_item">
                 <input
-                  class="seed_button"
-                  type="image"
-                  name="grow_pumpkin"
-                  src="images/inventory_pumpkin.png"
-                  width="40"
-                  height="40"
-                  alt="pumpkin, click to grow pumpkins"
-                  onclick="setPlayerSeed('pumpkins');"
+                class="seed_button"
+                type="image"
+                name="grow_pumpkin"
+                src="images/inventory_pumpkin.png"
+                width="40"
+                height="40"
+                alt="pumpkin, click to grow pumpkins"
+                onclick="setPlayerSeed('pumpkins');"
                 />
                 <p>Pumpkins</p>
               </div>
             </div>
           </div>
         </div>
+
         <div id="recipe_book" class="hidden">
           <div id="recipes">
-            <h2>Recipes:</h2>
+            <h2>Recipe Book</h2>
             <p>Click the image for the recipe you want to cook.</p>
             <div class="recipe_buttons">
               <div class="recipe_item">
@@ -136,7 +173,7 @@
                 </p>
               </div>
               <div class="recipe_item">
-                <input class="recipe_button" type="image" src="images/rb_strawberryjam.png" width="50" height="50" alt="click to cook strawberry jam" onclick="cook('strawberry jam');"> 
+                <input class="recipe_button" type="image" src="images/rb_strawberryjam.png" width="50" height="50" alt="click to cook strawberry jam" onclick="cook('strawberry jam');">
                 <p>
                   <span class="recipe_name">Strawberry Jam ($10):</span><br />
                   3 strawberries
@@ -152,10 +189,9 @@
               <div class="recipe_item">
                 <input class="recipe_button" type="image" src="images/rb_salad.png" width="50" height="50" alt="click to cook salad" onclick="cook('salad');"> 
                 <p><span class="recipe_name">
-                  Salad ($9):</span><br />
-                  1 tomatoes,<br />
-                  1 lettuce, 1 carrot
-                </p>
+                Salad ($9):</span><br />
+                1 tomatoes,<br />
+                1 lettuce, 1 carrot</p>
               </div>
             </div>
 
@@ -163,40 +199,35 @@
               <div class="recipe_item">
                 <input class="recipe_button" type="image" src="images/rb_kebab.png" width="50" height="50" alt="click to cook kebabs" onclick="cook('kebabs');"> 
                 <p><span class="recipe_name">
-                  Kebabs ($11):</span><br />
-                  1 carrot,<br />
-                  1 watermelons,<br />
-                  1 pumpkin
-                </p>
+                Kebabs ($11):</span><br />
+                1 carrot,<br />
+                1 watermelons,<br />
+                1 pumpkin</p>
               </div>
               <div class="recipe_item">
                 <input class="recipe_button" type="image" src="images/rb_sandwich.png" width="50" height="50" alt="click to cook sandwich" onclick="cook('sandwich');"> 
                 <p><span class="recipe_name">
-                  Sandwich ($7):</span><br />
-                  2 potatoes,<br />
-                  1 tomatoes,<br />
-                  1 lettuce, 1 milk
-                </p>
+                Sandwich ($7):</span><br />
+                2 potatoes,<br />
+                1 tomatoes,<br />
+                1 lettuce, 1 milk</p>
               </div>
               <div class="recipe_item">
                 <input class="recipe_button" type="image" src="images/rb_pumpkinpie.png" width="50" height="50" alt="click to cook pumpkin pie" onclick="cook('pumpkin pie');"> 
                 <p><span class="recipe_name">
-                  Pumpkin Pie ($18):</span><br />
-                  2 potatoes,<br />
-                  1 pumpkins, <br>
-                  1 milk
-                </p>
+                Pumpkin Pie ($18):</span><br />
+                2 potatoes,<br />
+                1 pumpkins, <br>
+                1 milk </p>
               </div>
               <div class="recipe_item">
                 <input class="recipe_button" type="image" src="images/rb_carrotcake.png" width="50" height="50" alt="click to cook carrot cake" onclick="cook('carrot cake');"> 
                 <p><span class="recipe_name">
-                  Carrot Cake ($18): </span><br />
-                  2 potatoes,<br />
-                  2 carrots, <br>
-                  1 milk
-                </p>
+                Carrot Cake ($18): </span><br />
+                2 potatoes,<br />
+                2 carrots, <br>
+                1 milk</p>
               </div>
-              
             </div>
 
             <p id="cant_cook" class="hidden">
@@ -246,9 +277,9 @@
           <img src="images/inventory_pumpkin.png" width="32" height="32" />
           <p>Pumpkins: <span id="pumpkin_inventory"></span></p>
         </div>
-        <div class="inventory_item">
-          <img src="images/inventory_milk.png" width="32" height="32" alt="milk icon"/>
-          <p>Milk: <span id="milk_inventory"></span></p>
+        <div class="inventory_item" id="milk_item">
+          <img src="images/milk.png" width="13" height="37" alt="milk icon"/>
+          <p id="milk_text">Milk: <span id="milk_inventory"></span></p>
         </div>
       </div>
     </div>
@@ -260,5 +291,6 @@
     <script src="js/plant.js"></script>
     <script src="js/stove.js"></script>
     <script src="js/cowGame.js"></script>
-  </body>
+  </main>
+</body>
 </html>

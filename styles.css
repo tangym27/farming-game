@@ -1,15 +1,57 @@
+/*Styles for Midterm Project*/
+
+/*general*/
+
+@import url('https://fonts.googleapis.com/css2?family=Grandstander&display=swap');
+
 body {
-  font-family: sans-serif;
-  width: 90%;
+  /*font-family: "OCR A Std", monospace;*/
+  font-family: 'Grandstander'; 
+  width: 95%;
   margin: auto;
+  font-weight: lighter;
+  color: black;
+}
+
+main {
+	margin: auto;
+}
+
+/*header, text*/
+
+header {
+	background-color: black;
+	color: pink;
+	text-align: left;
+	margin-bottom: 0.5em;
+}
+
+p {
+	font-family: sans-serif;
+}
+
+/*documentation section*/
+
+#instructions_cols {
+	display: flex;
+	flex-direction: row;
+}
+
+#instructions_cols > div {
+	width: 33%;
+}
+
+#instructions_cols > div > h3 {
+	text-align: center;
 }
 
 h1 {
-  font-size: 1.5em;
+  /*font-size: 1.5em;*/
 }
 
 #inventory > h2 {
   font-size: 1em;
+  font-weight: bold;
   margin: 5px;
 }
 
@@ -83,6 +125,14 @@ h1 {
 .inventory_item > p {
 	margin-top: 10px;
 	margin-left: 5px;
+}
+
+#milk_item {
+	margin-left: 10px;
+}
+
+#milk_text {
+	margin-left: 15px;
 }
 
 #seed_buttons,
