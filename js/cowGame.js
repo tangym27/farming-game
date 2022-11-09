@@ -30,7 +30,11 @@ class Milk {
     }
 
     // if player collects milk
-    if (dist(this.x, this.y, myBucket.x, myBucket.y) < 50) {
+    let myBucketMidX = (myBucket.x + myBucket.pic.width/2);
+    let myBucketMidY = (myBucket.y + myBucket.pic.height/2);
+    let thisMidY = (this.y + this.pic.height/2);
+    let thisMidX = (this.x + this.pic.width/2);
+    if (dist(thisMidX, thisMidY, myBucketMidX, myBucketMidY) < 20) {
       milkPoint++;
       this.collected = true;
       this.x = -100;
@@ -65,7 +69,11 @@ class Poop {
     this.x = constrain(this.x, 40, 600);
 
     // if player collects poop
-    if (dist(this.x, this.y, myBucket.x, myBucket.y) < 50) {
+    let myBucketMidX = (myBucket.x + myBucket.pic.width/2);
+    let myBucketMidY = (myBucket.y + myBucket.pic.height/2);
+    let thisMidY = (this.y + this.pic.height/2);
+    let thisMidX = (this.x + this.pic.width/2);
+    if (dist(thisMidX, thisMidY, myBucketMidX, myBucketMidY) < 20) {
       gameState = "endCowGame";
       cowGameState = false;
       inventory["milk"] += milkPoint;
@@ -112,8 +120,8 @@ function cowGameReset() {
       poops[i].speed = random(2, 5);
       poops[i].noiseLocation = random(0, 1000);
     }
-    // myBucket.x = 300;
-    // myBucket.y = 580;
+    myBucket.x = 300;
+    myBucket.y = 580;
     cowGameState = true;
   }
 }
