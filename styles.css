@@ -68,7 +68,8 @@ li {
   /*margin: 10px;*/
 }
 
-#instructions_cols h3, #instructions_cols p {
+#instructions_cols h3,
+#instructions_cols p {
   text-align: center;
 }
 
@@ -82,7 +83,6 @@ li {
 #game_and_inventory {
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: center;
 }
 
@@ -92,9 +92,7 @@ li {
 }
 
 #canvas {
-  display: block;
   z-index: -1;
-  margin: 10px;
   margin-bottom: 20px;
 }
 
@@ -121,8 +119,9 @@ li {
   padding: 15px;
 }
 
-#seed_panel > h2, #seed_panel > p {
-	text-align: center;
+#seed_panel > h2,
+#seed_panel > p {
+  text-align: center;
 }
 
 #seed_buttons,
@@ -161,8 +160,9 @@ li {
   padding: 15px;
 }
 
-#recipe_book > h2, #recipe_book > p {
-	text-align: center;
+#recipe_book > h2,
+#recipe_book > p {
+  text-align: center;
 }
 
 .recipe_item {
@@ -174,7 +174,8 @@ li {
 }
 
 .recipe_name {
-  font-weight: bold;
+  font-weight: bolder;
+  text-decoration: underline;
   font-size: 1em;
 }
 

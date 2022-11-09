@@ -3,7 +3,7 @@ class Plant {
     this.arrayX = x;
     this.arrayY = y;
     // plants will grow every x frames
-    this.growthTime = 50;
+    this.growthTime = 500;
     this.currentGrowth = this.growthTime + 1;
     this.id = id;
     // Randomly set certain grasses to display flowers
@@ -44,6 +44,9 @@ class Plant {
       }
       this.currentGrowth = 0;
     }
+    if (this.seedPosition >= 3) {
+      this.matured = true;
+    }
     this.currentGrowth++;
     if (this.seedPosition != -1) {
       drawTile(dirtId, this.arrayY * tileSize, this.arrayX * tileSize);
@@ -76,7 +79,7 @@ function setPlant(screenX, screenY) {
 function checkPlant(screenX, screenY) {
   let p = getPlant(screenX, screenY);
   // harvest if possible - reset plant stats as well
-  if (p.matured) {
+  if (p.id == crops[p.seedName][4] || p.matured) {
     inventory[p.seedName]++;
     p.id = dirtId;
     p.seedPosition = -1;

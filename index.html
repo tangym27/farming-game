@@ -5,7 +5,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/addons/p5.sound.min.js"></script>
 
-    <title>Midterm Project: Farming Game</title>
+    <title>Recessionary Ranch</title>
     <link rel="stylesheet" href="styles.css" />
     <style></style>
   </head>
@@ -27,14 +27,6 @@
           player movement and collision, planting/growing/harvesting
           ingredients, and cooking/collecting dishes based on fixed recipes.
         </p>
-        <p>
-          In future development, we would hope to add localStorage to make the
-          game playable over a longer period of time rather than playing in one
-          sitting. This would allow users to play the game for an unlimited time
-          as long as it is available on a server; the crop growth and cooking
-          processes could occur over longer periods of time (several hours) to
-          make the game feel more casual.
-        </p>
 
         <h2>Game Concept</h2>
         <p>
@@ -50,10 +42,13 @@
         </p>
 
         <h2>How to Play</h2>
-        <p>Please have your browser window set to at least 1000 pixels wide for the best experience!</p>
+        <p>
+          Please have your browser window set to at least 1000 pixels wide for
+          the best experience!
+        </p>
         <p>
           Use the WASD keys on your keyboard to move. (W = up, A = left, S =
-          down, D = right)
+          down, D = right)!
         </p>
         <p>
           The status window to the right of the game screen can be used to track
@@ -129,7 +124,11 @@
                 profit will be updated in the status window, and the stove will
                 return to its normal color.
               </li>
-              <li>Achievements you can unlock include surpassing $10, $100, and $200 in profit as well as cooking each dish in the recipe book at least once.</li>
+              <li>
+                Achievements you can unlock include surpassing $10, $100, and
+                $200 in profit as well as cooking each dish in the recipe book
+                at least once.
+              </li>
             </ul>
           </div>
         </div>
@@ -139,9 +138,9 @@
         <div id="game">
           <div id="seed_panel" class="hidden">
             <h2>Seed Bag</h2>
-              <p>
-                Click the image for the ingredient you want to grow.
-              </p>
+            <p>
+              Click the image for the ingredient you want to grow.
+            </p>
             <div id="seeds">
               <div id="seed_buttons">
                 <div class="seed_item">
@@ -255,7 +254,8 @@
                     onclick="cook('baked potatoes');"
                   />
                   <p>
-                    <span class="recipe_name">Baked Potatoes ($8):</span><br />2 potatoes
+                    <span class="recipe_name">Baked Potatoes ($8):</span><br />2
+                    potatoes
                   </p>
                 </div>
                 <div class="recipe_item">

@@ -62,7 +62,6 @@ let cowBGM;
 let mainBGMStart = false;
 let cowBGMStart = false;
 
-
 // Player inventory - increases when harvesting and decreases when cooking
 let inventory = {
   potatoes: 0,
@@ -103,8 +102,8 @@ function preload() {
   strawberryJamPic = loadImage("images/rb_strawberryjam.png");
   slicedWatermelonPic = loadImage("images/rb_watermelon.png");
 
-  cowBGM = createAudio('bgm/cowBGM.wav');
-  mainBGM = createAudio('bgm/mainBGM.mp3');
+  cowBGM = createAudio("bgm/cowBGM.wav");
+  mainBGM = createAudio("bgm/mainBGM.mp3");
 
   startScreenArt = [
     potatoPic,
@@ -133,7 +132,7 @@ function preload() {
 function setup() {
   canvas = createCanvas(640, 640).id("canvas");
   canvas.parent("#game");
-  background(128);
+  background(0);
 
   // create our player
   player = new Player(width / 2, height / 2);
@@ -181,6 +180,7 @@ function draw() {
     cowBGMStart = false;
 
     // text
+    textAlign(LEFT);
     fill(0);
     textFont("Grandstander");
     textSize(45);
@@ -195,10 +195,10 @@ function draw() {
   } else if (gameState == "farming") {
     cowBGMStart = false;
     cowBGM.pause();
-    if(mainBGMStart == false){
-        mainBGM.volume(0.1);
-        mainBGM.loop();
-        mainBGMStart = true;
+    if (mainBGMStart == false) {
+      mainBGM.volume(0.1);
+      mainBGM.loop();
+      mainBGMStart = true;
     }
     displayBackground();
     displayRecipes();
@@ -225,13 +225,12 @@ function draw() {
       document.getElementById("achievement4").classList.remove("hidden");
     }
   } else if (gameState == "cowGame") {
-
     mainBGMStart = false;
     mainBGM.pause();
-    if(cowBGMStart == false){
-        cowBGM.volume(0.1);
-        cowBGM.loop();
-        cowBGMStart = true;
+    if (cowBGMStart == false) {
+      cowBGM.volume(0.1);
+      cowBGM.loop();
+      cowBGMStart = true;
     }
 
     image(cloud, 0, 0);
