@@ -18,10 +18,21 @@ let tilesetArtwork,
   bucketPic;
 
 // Start Screen artwork variables
-let carrotPic, lettucePic, potatoPic, pumpkinPic, 
-  strawberryPic, tomatoPic, watermelonPic;
-let bakedPotatoPic, carrotCakePic, kebabPic, pumpkinPiePic, 
-  saladPic, sandwichPic, strawberryJamPic, slicedWatermelonPic;
+let carrotPic,
+  lettucePic,
+  potatoPic,
+  pumpkinPic,
+  strawberryPic,
+  tomatoPic,
+  watermelonPic;
+let bakedPotatoPic,
+  carrotCakePic,
+  kebabPic,
+  pumpkinPiePic,
+  saladPic,
+  sandwichPic,
+  strawberryJamPic,
+  slicedWatermelonPic;
 let startScreenObjects = [];
 let startScreenArt = [];
 
@@ -86,14 +97,27 @@ function preload() {
   slicedWatermelonPic = loadImage("images/rb_watermelon.png");
 
   startScreenArt = [
-    potatoPic, tomatoPic, lettucePic, carrotPic,
-    strawberryPic, watermelonPic, pumpkinPic, milkPic,
-    bakedPotatoPic, strawberryJamPic, slicedWatermelonPic, saladPic,
-    kebabPic, sandwichPic, pumpkinPiePic, carrotCakePic
-  ]
+    potatoPic,
+    tomatoPic,
+    lettucePic,
+    carrotPic,
+    strawberryPic,
+    watermelonPic,
+    pumpkinPic,
+    milkPic,
+    bakedPotatoPic,
+    strawberryJamPic,
+    slicedWatermelonPic,
+    saladPic,
+    kebabPic,
+    sandwichPic,
+    pumpkinPiePic,
+    carrotCakePic,
+  ];
 
   WebFont.load({
-    google: { families: ['Grandstander:400'] }});
+    google: { families: ["Grandstander:400"] },
+  });
 }
 
 function setup() {
@@ -113,25 +137,31 @@ function setup() {
   cowGameState = false;
   myCow = new Cow(10, 10);
   myBucket = new Bucket(300, 580);
-  for (let i = 0; i < 20; i++){
-      milks.push(new Milk());
+  for (let i = 0; i < 20; i++) {
+    milks.push(new Milk());
   }
-  for (let i = 0; i < 20; i++){
-      poops.push(new Poop());
+  for (let i = 0; i < 20; i++) {
+    poops.push(new Poop());
   }
 
   // set up start screen
-  for (let i=0; i<8; i++) {
-    startScreenObjects.push(new StartScreenFood(
-      50+(i*75), 120, startScreenArt[i], 
-      startScreenArt[i].width, startScreenArt[i].height));
+  for (let i = 0; i < 8; i++) {
+    startScreenObjects.push(
+      new StartScreenFood(
+        50 + i * 75,
+        120,
+        startScreenArt[i],
+        startScreenArt[i].width,
+        startScreenArt[i].height
+      )
+    );
   }
-  for (let i=8; i<16; i++) {
-    startScreenObjects.push(new StartScreenFood(
-      40+((i-8)*72), 460, startScreenArt[i], 50, 50));
+  for (let i = 8; i < 16; i++) {
+    startScreenObjects.push(
+      new StartScreenFood(40 + (i - 8) * 72, 460, startScreenArt[i], 50, 50)
+    );
   }
   gameState = "startScreen";
-
 }
 
 function draw() {
@@ -140,17 +170,16 @@ function draw() {
 
     // text
     fill(0);
-    textFont('Grandstander')
+    textFont("Grandstander");
     textSize(45);
     text("The Recessionary Ranch", 65, 290);
     textSize(25);
     text("Click anywhere to begin farming!", 115, 350);
 
     // jittering images
-    for (let i=0; i<startScreenObjects.length; i++) {
+    for (let i = 0; i < startScreenObjects.length; i++) {
       startScreenObjects[i].displayAndJitter();
     }
-
   } else if (gameState == "farming") {
     displayBackground();
     displayRecipes();
@@ -176,11 +205,9 @@ function draw() {
     if (cookedSet.size == 8 && achievement4 == false) {
       document.getElementById("achievement4").classList.remove("hidden");
     }
-
   } else if (gameState == "cowGame") {
     image(cloud, 0, 0);
     cowGameStart();
-
   } else if (gameState == "endCowGame") {
     cowGameEnd();
   }
@@ -252,10 +279,10 @@ function keyPressed() {
   }
 }
 
-// Start Screen says "Click anywhere to begin" - 
+// Start Screen says "Click anywhere to begin" -
 // change to "farming" game state and scroll to bottom of page
 function mousePressed() {
-  if (gameState=="startScreen") {
+  if (gameState == "startScreen") {
     gameState = "farming";
     window.scrollTo(0, document.body.scrollHeight);
   }
@@ -294,11 +321,11 @@ function closeAchievement() {
 }
 
 class StartScreenFood {
-  constructor (x, y, pic, width, height) {
+  constructor(x, y, pic, width, height) {
     this.x = x;
     this.y = y;
     this.origX = x;
-    this.origY = y;
+    this.origY = y + int(random(-9, 9));
     this.pic = pic;
     this.width = width;
     this.height = height;
@@ -306,9 +333,16 @@ class StartScreenFood {
   displayAndJitter() {
     image(this.pic, this.x, this.y, this.width, this.height);
 
-    this.x += random(-1,1);
-    this.y += random(-1,1);
-    this.x = constrain(this.x,this.origX-5,this.origX+5)
-    this.y = constrain(this.y,this.origY-5,this.origY+5);
+    if (this.goingUp) {
+      this.y += 0.5;
+    } else {
+      this.y -= 0.5;
+    }
+    if (this.y > this.origY + 10) {
+      this.goingUp = false;
+    }
+    if (this.y < this.origY - 10) {
+      this.goingUp = true;
+    }
   }
 }
