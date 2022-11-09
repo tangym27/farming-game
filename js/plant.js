@@ -6,6 +6,9 @@ class Plant {
     this.growthTime = 50;
     this.currentGrowth = this.growthTime + 1;
     this.id = id;
+    // Randomly set certain grasses to display flowers
+    this.hasFlowers = int(random(1, 10));
+    this.flowerId = random([1, 13, 14, 15, 16]);
     // tracks plant growing lifespan
     this.matured = false;
     this.seedPosition = -1;
@@ -46,6 +49,10 @@ class Plant {
       drawTile(dirtId, this.arrayY * tileSize, this.arrayX * tileSize);
     }
     drawTile(this.id, this.arrayY * tileSize, this.arrayX * tileSize);
+    // Randomly set certain grasses to display flowers
+    if (this.id == 3 && this.hasFlowers > 7) {
+      drawTile(this.flowerId, this.arrayY * tileSize, this.arrayX * tileSize);
+    }
   }
 }
 
