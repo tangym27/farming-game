@@ -77,6 +77,7 @@ class Poop{
         if (dist(this.x, this.y, myBucket.x, myBucket.y) < 50){
             gameState = "endCowGame";
             cowGameState = false;
+            inventory["milk"] += milkPoint;
         }
 
         //if player doesnt collect
@@ -137,7 +138,7 @@ function cowGameStart(){
         poops[i].displayAndMove();
     }
     if (keyIsDown(65)){
-          myBucket.x -= 5;
+        myBucket.x -= 5;
     }
     if (keyIsDown(68)){
         myBucket.x += 5;
@@ -148,7 +149,7 @@ function cowGameStart(){
     if (milkPoint == 10){
         gameState == "endCowGame";
         cowGameState = false;
-
+        inventory["milk"] += milkPoint;
     }
 
 

@@ -30,7 +30,7 @@ let inventory = {
   strawberries: 0,
   watermelons: 0,
   pumpkins: 0,
-  milk: 0,
+  milk: 0
 };
 
 function preload() {
@@ -72,9 +72,6 @@ function draw() {
     displayRecipes();
     displayStoves();
     displayInventory();
-    if (keyIsDown(67)) {
-      gameState = "cowGame";
-    }
   }
   if (gameState == "cowGame") {
     image(cloud, 0, 0);
@@ -109,8 +106,7 @@ function displayInventory() {
     inventory["watermelons"];
   document.getElementById("pumpkin_inventory").innerHTML =
     inventory["pumpkins"];
-
-  // document.getElementById("milk_inventory").innerHTML = inventory["milk"];
+  document.getElementById("milk_inventory").innerHTML = inventory["milk"];
 
   if (player.water) {
     document.getElementById("watering_can").innerHTML = "full";
@@ -118,6 +114,7 @@ function displayInventory() {
     document.getElementById("watering_can").innerHTML = "empty";
   }
   document.getElementById("profit").innerHTML = "$" + profit;
+  document.getElementById("current_seed").innerHTML = player.currentSeed;
 }
 
 // From HTML button, check if something can be cooked based on inventory and stove availaibity
@@ -137,13 +134,14 @@ function cook(tempRecipe) {
   }
 }
 
-// User interactions - space for most interactions and p to visit seeds
+// User interactions - space for most interactions,
+// p to visit seeds, c to play cow game
 function keyPressed() {
   if (key == " ") {
     player.process();
   }
 
-  if (key == "p") {
+  if (key == "p" && gameState == "farming") {
     if (seed_panel.classList.contains("hidden")) {
       seed_panel.classList.remove("hidden");
       recipe_book.classList.add("hidden");
@@ -151,6 +149,12 @@ function keyPressed() {
       seed_panel.classList.add("hidden");
     }
   }
+
+  if (key == "c" && gameState == "farming") {
+      gameState = "cowGame";
+      seed_panel.classList.add("hidden");
+      recipe_book.classList.add("hidden");
+    }
 }
 
 // Shows off recipe book
