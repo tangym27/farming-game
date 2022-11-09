@@ -165,7 +165,6 @@ function drawRecipe(id, screenX, screenY, progress) {
 // returns the program meaning behind an id
 function getState(screenX, screenY) {
   let id = getTileAtPosition(screenX, screenY);
-
   if (id == 3) {
     return "walk";
   } else if (id == 12) {
@@ -176,6 +175,8 @@ function getState(screenX, screenY) {
     return "food";
   } else if (id == 48) {
     return "stove";
+  } else if (id == 51) {
+    return "cow";
   } else if (id > 5 && id != 49 && id != 51) {
     return "plant";
   }
