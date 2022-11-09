@@ -2,6 +2,7 @@
 <html>
   <head>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
     <title>Midterm Project: Farming Game</title>
     <link rel="stylesheet" href="styles.css" />
     <style></style>
@@ -47,6 +48,7 @@
         </p>
 
         <h2>How to Play</h2>
+        <p>Please have your browser window set to at least 1000 pixels wide for the best experience!</p>
         <p>
           Use the WASD keys on your keyboard to move. (W = up, A = left, S =
           down, D = right)
@@ -125,6 +127,7 @@
                 profit will be updated in the status window, and the stove will
                 return to its normal color.
               </li>
+              <li>Achievements you can unlock include surpassing $10, $100, and $200 in profit as well as cooking each dish in the recipe book at least once.</li>
             </ul>
           </div>
         </div>
@@ -133,12 +136,11 @@
       <div id="game_and_inventory">
         <div id="game">
           <div id="seed_panel" class="hidden">
-            <div id="seeds">
-              <h2>Seed Bag</h2>
+            <h2>Seed Bag</h2>
               <p>
-                Click the image for the ingredient you want to grow to select
-                its seed.
+                Click the image for the ingredient you want to grow.
               </p>
+            <div id="seeds">
               <div id="seed_buttons">
                 <div class="seed_item">
                   <input
@@ -236,9 +238,9 @@
           </div>
 
           <div id="recipe_book" class="hidden">
+            <h2>Recipe Book</h2>
+            <p>Click the image for the recipe you want to cook.</p>
             <div id="recipes">
-              <h2>Recipe Book</h2>
-              <p>Click the image for the recipe you want to cook.</p>
               <div class="recipe_buttons">
                 <div class="recipe_item">
                   <input
@@ -251,8 +253,7 @@
                     onclick="cook('baked potatoes');"
                   />
                   <p>
-                    <span class="recipe_name">Baked Potatoes ($8):</span><br />2
-                    potatoes
+                    <span class="recipe_name">Baked Potatoes ($8):</span><br />2 potatoes
                   </p>
                 </div>
                 <div class="recipe_item">
@@ -318,7 +319,7 @@
                   <p>
                     <span class="recipe_name"> Kebabs ($11):</span><br />
                     1 carrot,<br />
-                    1 watermelons,<br />
+                    1 watermelon,<br />
                     1 pumpkin
                   </p>
                 </div>
@@ -336,7 +337,7 @@
                     <span class="recipe_name"> Sandwich ($7):</span><br />
                     2 potatoes,<br />
                     1 tomatoes,<br />
-                    1 lettuce, 1 milk
+                    1 lettuce, 2 milk
                   </p>
                 </div>
                 <div class="recipe_item">
@@ -352,8 +353,8 @@
                   <p>
                     <span class="recipe_name"> Pumpkin Pie ($18):</span><br />
                     2 potatoes,<br />
-                    1 pumpkins, <br />
-                    1 milk
+                    1 pumpkin, <br />
+                    2 milk
                   </p>
                 </div>
                 <div class="recipe_item">
@@ -370,7 +371,7 @@
                     <span class="recipe_name"> Carrot Cake ($18): </span><br />
                     2 potatoes,<br />
                     2 carrots, <br />
-                    1 milk
+                    2 milk
                   </p>
                 </div>
               </div>
@@ -413,44 +414,44 @@
         <div id="inventory">
           <h2>Status</h2>
 
-          <h3>Total Profit: <span id="profit"></span></h3>
+          <h3>Total Profit: <span id="profit">$0</span></h3>
 
-          <h3>Currently planting: <span id="current_seed"></span></h3>
+          <h3>Currently planting: <span id="current_seed">potatoes</span></h3>
 
-          <h3>Watering Can is <span id="watering_can"></span>!</h3>
+          <h3>Watering Can is <span id="watering_can">empty</span>!</h3>
 
           <h2>Inventory</h2>
           <div class="inventory_item">
             <img src="images/inventory_potato.png" width="32" height="32" />
-            <p>Potatoes: <span id="potatoes_inventory"></span></p>
+            <p>Potatoes: <span id="potatoes_inventory">0</span></p>
           </div>
           <div class="inventory_item">
             <img src="images/inventory_tomato.png" width="32" height="32" />
-            <p>Tomatoes: <span id="tomato_inventory"></span></p>
+            <p>Tomatoes: <span id="tomato_inventory">0</span></p>
           </div>
           <div class="inventory_item">
             <img src="images/inventory_lettuce.png" width="32" height="32" />
-            <p>Lettuce: <span id="lettuce_inventory"></span></p>
+            <p>Lettuce: <span id="lettuce_inventory">0</span></p>
           </div>
           <div class="inventory_item">
             <img src="images/inventory_carrot.png" width="32" height="32" />
-            <p>Carrots: <span id="carrot_inventory"></span></p>
+            <p>Carrots: <span id="carrot_inventory">0</span></p>
           </div>
           <div class="inventory_item">
             <img src="images/inventory_strawberry.png" width="32" height="32" />
-            <p>Strawberries: <span id="strawberry_inventory"></span></p>
+            <p>Strawberries: <span id="strawberry_inventory">0</span></p>
           </div>
           <div class="inventory_item">
             <img src="images/inventory_watermelon.png" width="32" height="32" />
-            <p>Watermelons: <span id="watermelon_inventory"></span></p>
+            <p>Watermelons: <span id="watermelon_inventory">0</span></p>
           </div>
           <div class="inventory_item">
             <img src="images/inventory_pumpkin.png" width="32" height="32" />
-            <p>Pumpkins: <span id="pumpkin_inventory"></span></p>
+            <p>Pumpkins: <span id="pumpkin_inventory">0</span></p>
           </div>
           <div class="inventory_item" id="milk_item">
             <img src="images/milk.png" width="13" height="37" alt="milk icon" />
-            <p id="milk_text">Milk: <span id="milk_inventory"></span></p>
+            <p id="milk_text">Milk: <span id="milk_inventory">0</span></p>
           </div>
         </div>
       </div>
