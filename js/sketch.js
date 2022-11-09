@@ -56,16 +56,23 @@ let milks = [];
 let poops = [];
 let myBucket;
 
+//soundFile variables
+let mainBGM;
+let cowBGM;
+let mainBGMStart = false;
+let cowBGMStart = false;
+
+
 // Player inventory - increases when harvesting and decreases when cooking
 let inventory = {
-  potatoes: 20,
-  tomatoes: 20,
-  lettuce: 20,
-  carrots: 20,
-  strawberries: 20,
-  watermelons: 20,
-  pumpkins: 20,
-  milk: 20,
+  potatoes: 0,
+  tomatoes: 0,
+  lettuce: 0,
+  carrots: 0,
+  strawberries: 0,
+  watermelons: 0,
+  pumpkins: 0,
+  milk: 0,
 };
 
 function preload() {
@@ -95,6 +102,9 @@ function preload() {
   sandwichPic = loadImage("images/rb_sandwich.png");
   strawberryJamPic = loadImage("images/rb_strawberryjam.png");
   slicedWatermelonPic = loadImage("images/rb_watermelon.png");
+
+  cowBGM = createAudio('bgm/cowBGM.wav');
+  mainBGM = createAudio('bgm/mainBGM.mp3');
 
   startScreenArt = [
     potatoPic,
@@ -137,7 +147,7 @@ function setup() {
   cowGameState = false;
   myCow = new Cow(10, 10);
   myBucket = new Bucket(300, 580);
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 10; i++) {
     milks.push(new Milk());
   }
   for (let i = 0; i < 20; i++) {
@@ -167,6 +177,8 @@ function setup() {
 function draw() {
   if (gameState == "startScreen") {
     background(169, 227, 255);
+    mainBGMStart = false;
+    cowBGMStart = false;
 
     // text
     fill(0);
@@ -181,6 +193,13 @@ function draw() {
       startScreenObjects[i].displayAndJitter();
     }
   } else if (gameState == "farming") {
+    cowBGMStart = false;
+    cowBGM.pause();
+    if(mainBGMStart == false){
+        mainBGM.volume(0.1);
+        mainBGM.loop();
+        mainBGMStart = true;
+    }
     displayBackground();
     displayRecipes();
     displayStoves();
@@ -206,6 +225,15 @@ function draw() {
       document.getElementById("achievement4").classList.remove("hidden");
     }
   } else if (gameState == "cowGame") {
+
+    mainBGMStart = false;
+    mainBGM.pause();
+    if(cowBGMStart == false){
+        cowBGM.volume(0.1);
+        cowBGM.loop();
+        cowBGMStart = true;
+    }
+
     image(cloud, 0, 0);
     cowGameStart();
   } else if (gameState == "endCowGame") {
