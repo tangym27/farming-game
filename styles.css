@@ -2,52 +2,76 @@
 
 /*general*/
 
-@import url('https://fonts.googleapis.com/css2?family=Grandstander&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Grandstander&display=swap");
 
 body {
-  /*font-family: "OCR A Std", monospace;*/
-  font-family: 'Grandstander'; 
-  width: 95%;
+  font-family: "Grandstander";
+  width: 98%;
   margin: auto;
   font-weight: lighter;
   color: black;
+  background: rgb(174, 238, 187);
+  background: linear-gradient(
+    0deg,
+    rgba(174, 238, 187, 1) 0%,
+    rgba(169, 227, 255, 1) 100%
+  );
 }
 
 main {
-	margin: auto;
+  margin: auto;
+  width: 98%;
 }
 
 /*header, text*/
 
 header {
-	background-color: black;
-	color: pink;
-	text-align: left;
-	margin-bottom: 0.5em;
+  color: black;
+  text-align: left;
+  margin-bottom: 0.5em;
+  text-align: center;
 }
 
-p {
-	font-family: sans-serif;
+h1 {
+  font-size: 1.6em;
+  padding: 0.5em;
+  padding-top: 1em;
+  margin: 0;
+  text-shadow: 2px 2px 5px mediumspringgreen;
+}
+
+header > h2 {
+  font-size: 1.2em;
+  padding: 0.5em;
+  margin: 0;
 }
 
 /*documentation section*/
 
+#documentation p,
+li {
+  font-family: sans-serif;
+}
+
 #instructions_cols {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 #instructions_cols > div {
-	width: 33%;
+  width: 33%;
 }
 
 #instructions_cols > div > h3 {
-	text-align: center;
+  text-align: center;
 }
 
-h1 {
-  /*font-size: 1.5em;*/
+#documentation > h2,
+#documentation h3 {
+  text-shadow: 2px 2px 5px mediumspringgreen;
 }
+
+/*status window, inventory*/
 
 #inventory > h2 {
   font-size: 1em;
@@ -56,7 +80,7 @@ h1 {
 }
 
 #inventory > p {
-	font-size: 0.9em;
+  font-size: 0.9em;
 }
 
 #game_and_inventory {
@@ -65,18 +89,31 @@ h1 {
 }
 
 #game {
-	position: relative;
+  position: relative;
 }
 
 #canvas {
   display: block;
   z-index: -1;
+  margin: 10px;
+  margin-bottom: 15px;
 }
 
-#seed_panel, #recipe_book, #inventory {
-	background-color: #c8a480ed;
-	box-sizing: border-box;
-	border-radius: 16px;
+#seed_panel,
+#recipe_book,
+#inventory,
+.achievement {
+  background-color: #c8a480ed;
+  box-sizing: border-box;
+  border-radius: 16px;
+}
+
+#seed_panel,
+#recipe_book,
+#inventory {
+  background-color: #c8a480ed;
+  box-sizing: border-box;
+  border-radius: 16px;
 }
 
 #seed_panel {
@@ -100,14 +137,26 @@ h1 {
 }
 
 #inventory {
-  float: left;
+  /*float: left;*/
   display: flex;
   flex-direction: column;
   width: 320px;
   margin: 10px;
   padding-left: 15px;
   padding-right: 10px;
-  padding-top: 15px;
+  padding-top: 10px;
+}
+
+#inventory > h2 {
+  font-size: 1.3em;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+#inventory > h3 {
+  font-size: 1em;
+  margin: 0;
+  padding: 5px;
 }
 
 .inventory_item {
@@ -123,16 +172,22 @@ h1 {
 }
 
 .inventory_item > p {
-	margin-top: 10px;
-	margin-left: 5px;
+  margin-top: 10px;
+  margin-left: 5px;
 }
 
 #milk_item {
-	margin-left: 10px;
+  margin-left: 10px;
 }
 
 #milk_text {
-	margin-left: 15px;
+  margin-left: 15px;
+}
+
+#profit,
+#current_seed,
+#watering_can {
+  background-color: palegreen;
 }
 
 #seed_buttons,
@@ -150,10 +205,10 @@ h1 {
 }
 
 .seed_item {
-	width: 13.33%;
-	font-size: 0.8em;
-	padding: 5px;
-	text-align: center;
+  width: 13.33%;
+  font-size: 0.8em;
+  padding: 5px;
+  text-align: center;
 }
 
 .seed_button,
@@ -168,17 +223,33 @@ h1 {
 }
 
 .recipe_name {
-	font-weight: bold;
-	font-size: 1em;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.achievement {
+  position: absolute;
+  z-index: 3;
+  left: 80px;
+  top: 230px;
+  width: 480px;
+  height: 180px;
+  padding: 15px;
+  text-align: center;
+}
+
+.achievement > h2 {
+  text-shadow: 2px 2px 5px palegreen;
 }
 
 #cant_cook,
 #cant_bake {
   background: red;
   color: white;
-  width: 385px;
+  width: 480px;
   padding: 10px;
   margin: auto;
+  text-align: center;
 }
 
 .hidden {

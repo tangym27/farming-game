@@ -187,6 +187,8 @@ class Player {
     // Close recipe book when out of range of the stoves
     if (this.y < 80 || this.y > 110 || this.x < 40 || this.x > 180) {
       recipe_book.classList.add("hidden");
+      cant_cook.classList.add("hidden");
+      cant_bake.classList.add("hidden");
     }
   }
 }
