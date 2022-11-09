@@ -30,11 +30,11 @@ class Milk {
     }
 
     // if player collects milk
-    let myBucketMidX = (myBucket.x + myBucket.pic.width/2);
-    let myBucketMidY = (myBucket.y + myBucket.pic.height/2);
-    let thisMidY = (this.y + this.pic.height/2);
-    let thisMidX = (this.x + this.pic.width/2);
-    if (dist(thisMidX, thisMidY, myBucketMidX, myBucketMidY) < 20) {
+    let myBucketMidX = myBucket.x + myBucket.pic.width / 2;
+    let myBucketMidY = myBucket.y + myBucket.pic.height / 2;
+    let thisMidY = this.y + this.pic.height / 2;
+    let thisMidX = this.x + this.pic.width / 2;
+    if (dist(thisMidX, thisMidY, myBucketMidX, myBucketMidY) < 25) {
       milkPoint++;
       this.collected = true;
       this.x = -100;
@@ -48,7 +48,6 @@ class Milk {
       this.speed = random(2, 5);
       this.noiseLocation = random(0, 1000);
     }
-
     image(this.pic, this.x, this.y);
   }
 }
@@ -69,11 +68,11 @@ class Poop {
     this.x = constrain(this.x, 40, 600);
 
     // if player collects poop
-    let myBucketMidX = (myBucket.x + myBucket.pic.width/2);
-    let myBucketMidY = (myBucket.y + myBucket.pic.height/2);
-    let thisMidY = (this.y + this.pic.height/2);
-    let thisMidX = (this.x + this.pic.width/2);
-    if (dist(thisMidX, thisMidY, myBucketMidX, myBucketMidY) < 20) {
+    let myBucketMidX = myBucket.x + myBucket.pic.width / 2;
+    let myBucketMidY = myBucket.y + myBucket.pic.height / 2;
+    let thisMidY = this.y + this.pic.height / 2;
+    let thisMidX = this.x + this.pic.width / 2;
+    if (dist(thisMidX, thisMidY, myBucketMidX, myBucketMidY) < 25) {
       gameState = "endCowGame";
       cowGameState = false;
       inventory["milk"] += milkPoint;
@@ -128,8 +127,10 @@ function cowGameReset() {
 
 function cowGameStart() {
   cowGameReset();
+  textAlign(CENTER);
+
   fill(0);
-  text("Milk Count: " + milkPoint, 20, 40);
+  text("Milk Count: " + milkPoint, 90, 40);
   myCow.displayAndMove();
 
   for (let i = 0; i < milks.length; i++) {
@@ -156,11 +157,16 @@ function cowGameStart() {
 }
 
 function cowGameEnd() {
-  background(0);
-  fill(255);
-  textSize(30);
-  text("You've collected " + milkPoint + " bottles of milk!", 75, 250);
-  text("Press SPACE to return to farming.", 80, 330);
+  background("#a8ebf3");
+  fill(0);
+  textAlign(CENTER);
+  textSize(25);
+  text(
+    "You've collected " + milkPoint + " bottles of milk!",
+    width / 2,
+    height / 2
+  );
+  text("Press SPACE to return to farming.", width / 2, height / 2 + 30);
 
   if (keyIsDown(32)) {
     gameState = "farming";

@@ -8,7 +8,7 @@ class Player {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.speed = 5;
+    this.speed = 3;
     this.water = false;
     this.currentSeed = "potatoes";
     // Character tileset has three images in each direction.
@@ -50,7 +50,7 @@ class Player {
             break;
           case "cow":
             gameState = "cowGame";
-            player.y = player.y+tileSize;
+            player.y = player.y + tileSize;
             this.graphic = [0, 4, 8][this.graphicOffset];
             this.direction = "down";
             break;
@@ -75,7 +75,7 @@ class Player {
             break;
           case "cow":
             gameState = "cowGame";
-            player.y = player.y-tileSize;
+            player.y = player.y - tileSize;
             this.graphic = [2, 6, 10][this.graphicOffset];
             this.direction = "up";
             break;
@@ -100,7 +100,7 @@ class Player {
             break;
           case "cow":
             gameState = "cowGame";
-            player.x = player.x-tileSize;
+            player.x = player.x - tileSize;
             this.graphic = [3, 7, 11][this.graphicOffset];
             this.direction = "left";
             cowGameState = true;
@@ -126,7 +126,7 @@ class Player {
             break;
           case "cow":
             gameState = "cowGame";
-            player.x = player.x-5;
+            player.x = player.x - 5;
             this.graphic = [3, 7, 11][this.graphicOffset];
             this.direction = "left";
             break;
