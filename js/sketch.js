@@ -182,36 +182,36 @@ function keyPressed() {
   if (key == "Escape") {
     closeAchievement();
   }
+}
 
-  // Shows off recipe book
-  function openMenu() {
-    if (recipe_book.classList.contains("hidden")) {
-      closeAchievement();
-      recipe_book.classList.remove("hidden");
-      seed_panel.classList.add("hidden");
-    } else {
-      recipe_book.classList.add("hidden");
-      cant_cook.classList.add("hidden");
-      cant_bake.classList.add("hidden");
-    }
+// Shows off recipe book
+function openMenu() {
+  if (recipe_book.classList.contains("hidden")) {
+    closeAchievement();
+    recipe_book.classList.remove("hidden");
+    seed_panel.classList.add("hidden");
+  } else {
+    recipe_book.classList.add("hidden");
+    cant_cook.classList.add("hidden");
+    cant_bake.classList.add("hidden");
   }
+}
 
-  // Closes achievement popups appropriately
-  function closeAchievement() {
-    if (profit >= 10) {
-      if (profit >= 200) {
-        document.getElementById("achievement3").classList.add("hidden");
-        achievement3 = true;
-      } else if (profit >= 100) {
-        document.getElementById("achievement2").classList.add("hidden");
-        achievement2 = true;
-      }
-      document.getElementById("achievement1").classList.add("hidden");
-      achievement1 = true;
+// Closes achievement popups appropriately
+function closeAchievement() {
+  if (profit >= 10) {
+    if (profit >= 200) {
+      document.getElementById("achievement3").classList.add("hidden");
+      achievement3 = true;
+    } else if (profit >= 100) {
+      document.getElementById("achievement2").classList.add("hidden");
+      achievement2 = true;
     }
-    if (cookedSet.size >= 8) {
-      document.getElementById("achievement4").classList.add("hidden");
-      achievement4 = true;
-    }
+    document.getElementById("achievement1").classList.add("hidden");
+    achievement1 = true;
+  }
+  if (cookedSet.size >= 8) {
+    document.getElementById("achievement4").classList.add("hidden");
+    achievement4 = true;
   }
 }
