@@ -25,6 +25,7 @@ class Stove {
     this.id = 48;
 
     profit += this.recipe.price;
+    cookedSet.add(this.recipe.name);
   }
 
   // Show development of cooking
@@ -42,7 +43,7 @@ class Stove {
 
 // Configure stoves setup
 function setupStoves() {
-  for (let x = 2; x < 5; x++) {
+  for (let x = 2; x < 6; x++) {
     let temp = new Stove(x, 2);
     stoves.push(temp);
   }
@@ -60,7 +61,7 @@ function displayStoves() {
 
 // Allow for cokoking based on recipe
 function cookOnStove(recipe) {
-  let stoveNum = constrain(int(player.x / 32) - 1, 0, stoves.length - 1);
+  let stoveNum = constrain(int(map(player.x, 48, 180, 0, 4)), 0, 3);
 
   let stove = stoves[stoveNum];
   if (stove.on) {

@@ -16,21 +16,28 @@ let tilesetArtwork,
   milkPic,
   poopPic,
   bucketPic;
-let gameState, cowGameState;
+let gameState, cowGameState, endCowGame;
 
 // Recipe Variables
 let recipe, recipeName, canCook;
 
+// Achievement Variables
+let achievement1 = false;
+let achievement2 = false;
+let achievement3 = false;
+let achievement4 = false;
+const cookedSet = new Set();
+
 // Player inventory - increases when harvesting and decreases when cooking
 let inventory = {
-  potatoes: 10,
-  tomatoes: 0,
-  lettuce: 0,
-  carrots: 0,
-  strawberries: 0,
-  watermelons: 0,
-  pumpkins: 0,
-  milk: 0
+  potatoes: 20,
+  tomatoes: 20,
+  lettuce: 20,
+  carrots: 20,
+  strawberries: 20,
+  watermelons: 20,
+  pumpkins: 20,
+  milk: 20
 };
 
 function preload() {
@@ -57,7 +64,7 @@ function setup() {
   setupPlantWorld();
   setupStoves();
 
-  //setting up cowGame
+  // setting up cowGame
   cowGameState = false;
   myCow = new Cow(10, 10);
   myBucket = new Bucket(300, 580);
@@ -72,6 +79,24 @@ function draw() {
     displayRecipes();
     displayStoves();
     displayInventory();
+
+    if (profit >= 10 && achievement1==false) {
+      document.getElementById('achievement1').classList.remove('hidden');
+    }
+
+    if (profit >= 100 && achievement2==false) {
+      document.getElementById('achievement1').classList.add('hidden');
+      document.getElementById('achievement2').classList.remove('hidden');
+    }
+
+    if (profit >= 500 && achievement3==false) {
+      document.getElementById('achievement2').classList.add('hidden');
+      document.getElementById('achievement3').classList.remove('hidden');
+    }
+
+    if (cookedSet.size==8 && achievement4==false) {
+      document.getElementById('achievement4').classList.remove('hidden');
+    }
   }
   if (gameState == "cowGame") {
     image(cloud, 0, 0);
@@ -127,15 +152,18 @@ function cook(tempRecipe) {
     cant_cook.classList.add("hidden");
     if (canBake) {
       recipe_book.classList.add("hidden");
+      cant_cook.classList.add("hidden");
+      cant_bake.classList.add("hidden");
     }
   } else {
     cant_cook.classList.remove("hidden");
+    cant_bake.classList.add("hidden");
     return;
   }
 }
 
 // User interactions - space for most interactions,
-// p to visit seeds, c to play cow game
+// p to visit seeds, escape for exiting out of achievement popups
 function keyPressed() {
   if (key == " ") {
     player.process();
@@ -145,25 +173,45 @@ function keyPressed() {
     if (seed_panel.classList.contains("hidden")) {
       seed_panel.classList.remove("hidden");
       recipe_book.classList.add("hidden");
+      closeAchievement();
     } else {
       seed_panel.classList.add("hidden");
     }
   }
 
-  if (key == "c" && gameState == "farming") {
-      gameState = "cowGame";
-      seed_panel.classList.add("hidden");
-      recipe_book.classList.add("hidden");
-    }
+  if (key == "Escape") {
+    closeAchievement();
 }
 
 // Shows off recipe book
-function openMenu() {
+function openMenu() {  
   if (recipe_book.classList.contains("hidden")) {
+    closeAchievement();
     recipe_book.classList.remove("hidden");
     seed_panel.classList.add("hidden");
   } else {
     recipe_book.classList.add("hidden");
     cant_cook.classList.add("hidden");
+    cant_bake.classList.add("hidden");
+  }
+}
+
+// Closes achievement popups appropriately
+function closeAchievement() {
+  if (profit>=10) {
+      if (profit>=200) {
+        document.getElementById('achievement3').classList.add('hidden');
+        achievement3 = true;
+      } else if (profit>=100) {
+        document.getElementById('achievement2').classList.add('hidden');
+        achievement2 = true;
+      }
+      document.getElementById('achievement1').classList.add('hidden');
+      achievement1 = true;
+    }
+    if (cookedSet.size>=8) {
+      document.getElementById('achievement4').classList.add('hidden');
+      achievement4 = true;
+    }
   }
 }

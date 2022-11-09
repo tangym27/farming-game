@@ -29,9 +29,11 @@ class Recipe {
         inventory[i] -= this.ingredients[i];
       }
       cant_bake.classList.add("hidden");
+      cant_cook.classList.add("hidden");
       return true;
     }
     cant_bake.classList.remove("hidden");
+    cant_cook.classList.add("hidden");
     return false;
   }
 }
@@ -44,9 +46,9 @@ function setupRecipes() {
     "sliced watermelons": [0, { watermelons: 1 }, 5],
     salad: [10, { lettuce: 1, carrots: 1, tomatoes: 1 }, 9],
     kebabs: [12, { carrots: 1, pumpkins: 1, watermelons: 1 }, 11],
-    sandwich: [13, { potatoes: 2, lettuce: 1, tomatoes: 1 }, 7],
-    "pumpkin pie": [1, { potatoes: 2, pumpkins: 1 }, 18],
-    "carrot cake": [2, { potatoes: 2, carrots: 2 }, 18],
+    sandwich: [13, { potatoes: 2, lettuce: 1, tomatoes: 1, milk: 1 }, 7],
+    "pumpkin pie": [1, { potatoes: 2, pumpkins: 1, milk: 1 }, 18],
+    "carrot cake": [2, { potatoes: 2, carrots: 2, milk: 1 }, 18],
   };
 
   for (const [key, value] of Object.entries(recipesData)) {

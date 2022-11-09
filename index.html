@@ -2,14 +2,14 @@
 <html>
 <head>
   <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
-  <title>Midterm Farming Game</title>
+  <title>Midterm Project: Farming Game</title>
   <link rel="stylesheet" href="styles.css" />
   <style></style>
 </head>
 
 <body>
   <header>
-    <h1>Farming Game</h1>
+    <h1>The Recessionary Ranch (feat. The Broke Farmer)</h1>
     <h2>Erin Choi, Tiffany (Thinzar) Lin, Michelle Tang</h2>
   </header>
 
@@ -21,7 +21,7 @@
 
       <h2>Game Concept</h2>
       <p>
-        You've stumbled upon the perfect plot of land for starting your own farm, complete with a bag of seeds, soil ready for cultivation, a watering can, a small pond, and a giant flying cow. There's even a kitchen with a recipe book that uses the crops you can grow! Make as much money as you can while you're here by growing and harvesting crops, then use them to cook dishes to sell!
+        A recession is about to begin, and your plans to find a new job have been soiled. You're about to lose hope when, suddenly, you stumble upon the perfect plot of land for starting your own farm, complete with a bag of seeds, soil ready for cultivation, a watering can, a small pond, and a giant flying cow. There's even a kitchen with a recipe book that uses the crops you can grow! Make as much money as you can to prepare for the recession by growing and harvesting crops, then use them to cook dishes to sell. Unlock achievements along the way based on what you cook and how much you earn!
       </p>
 
       <h2>How to Play</h2>
@@ -30,7 +30,7 @@
 
       <div id="instructions_cols">
         <div>
-          <h3>Planting, Growing, Harvesting Crops</h3>
+          <h3>Planting, Growing, Harvesting</h3>
           <ul>
             <li>Press P to toggle the pop-up window that shows you what seeds you can plant. Click the image of the ingredient you want to plant.</li>
             <li>Walk up to a square of soil and press SPACE to plant a seed. Wait while the plant goes through 4 stages of growth - when it's fully matured and looks as it appears in the inventory or seed window, press SPACE in front of it to harvest it.</li>
@@ -40,20 +40,21 @@
         </div>
         
         <div>
-          <h3>The Flying Cow Game: Obtaining Milk</h3>
+          <h3>Udderly Amoosing Cow Game</h3>
+          <p>You can only obtain milk through this minigame!</p>
           <ul>
-            <li>Walk up to the white doors at the left of the game screen and press C to begin the minigame. The Flying Cow will immediately begin to produce milk and dung!</li>
+            <li>Walk up to the white doors at the left of the game screen and press SPACE to begin the minigame. The Flying Cow will immediately begin to produce milk and dung!</li>
             <li>Use the A and D keys to move your bucket left and right.</li>
-            <li>Collect milk bottles while avoiding the cow dung. The game ends when you collect a maximum of 5 bottles of milk or collect dung.</li>
+            <li>Collect milk bottles while avoiding the cow dung. The game ends when you collect a maximum of 10 bottles of milk or collect dung.</li>
           </ul>
         </div>
 
         <div>
-          <h3>Cooking and Selling Dishes</h3>
+          <h3>Cooking and Selling</h3>
           <ul>
             <li>Walk up to a stove in the kitchen (at the top left of the game screen) and press SPACE to open the recipe book. Click the image of the recipe you want to cook.</li>
             <li>If you have enough ingredients, the stove will turn brown to indicate it is being used. The dish will appear on the table behind the stove being used and slowly grow larger as it is being prepared.</li>
-            <li>The stove will return to its normal color when the dish is ready. Walk up to the table with the completed dish and press SPACE to sell it for its fixed cost (listed in the recipe book). Your total profit will be updated in the status window.</li>
+            <li>When the dish stops growing larger, it's ready to sell! Walk up to the table with the completed dish and press SPACE to sell it for its fixed cost (listed in the recipe book). Your total profit will be updated in the status window, and the stove will return to its normal color.</li>
           </ul>
         </div>
       </div>
@@ -239,16 +240,42 @@
             </p>
           </div>
         </div>
+
+        <div id="achievement1" class="achievement hidden">
+          <h2>Congratulations!</h2>
+          <h3>You've earned $10 in profit!</h3>
+          <p>Press ESC to close this window.</p>
+        </div>
+
+        <div id="achievement2" class="achievement hidden">
+          <h2>Congratulations!</h2>
+          <h3>You've earned $100 in profit!</h3>
+          <p>Press ESC to close this window.</p>
+        </div>
+
+        <div id="achievement3" class="achievement hidden">
+          <h2>Congratulations!</h2>
+          <h3>You've earned $200 in profit!</h3>
+          <p>Press ESC to close this window.</p>
+        </div>
+
+        <div id="achievement4" class="achievement hidden">
+          <h2>Congratulations!</h2>
+          <h3>You've cooked each dish at least once!</h3>
+          <p>Press ESC to close this window.</p>
+        </div>
       </div>
 
       <div id="inventory">
-        <h2>Total Profit: <span id="profit"></span></h2>
+        <h2>Status</h2>
 
-        <h2>Currently planting: <span id="current_seed"></span></h2>
+        <h3>Total Profit: <span id="profit"></span></h3>
 
-        <h2>Watering Can is <span id="watering_can"></span>!</h2>
+        <h3>Currently planting: <span id="current_seed"></span></h3>
 
-        <h2>Inventory:</h2>
+        <h3>Watering Can is <span id="watering_can"></span>!</h3>
+
+        <h2>Inventory</h2>
         <div class="inventory_item">
           <img src="images/inventory_potato.png" width="32" height="32" />
           <p>Potatoes: <span id="potatoes_inventory"></span></p>
