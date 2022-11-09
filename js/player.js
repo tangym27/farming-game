@@ -48,6 +48,11 @@ class Player {
           case "stove":
             openMenu();
             break;
+          case "cow":
+            gameState = "cowGame";
+            player.x = width / 2;
+            player.y = height / 2;
+            break;
         }
         break;
       case "down":
@@ -66,6 +71,11 @@ class Player {
             break;
           case "stove":
             openMenu();
+            break;
+          case "cow":
+            gameState = "cowGame";
+            player.x = width / 2;
+            player.y = height / 2;
             break;
         }
         break;
@@ -86,6 +96,11 @@ class Player {
           case "stove":
             openMenu();
             break;
+          case "cow":
+            gameState = "cowGame";
+            player.x = width / 2;
+            player.y = height / 2;
+            break;
         }
         break;
       case "right":
@@ -104,6 +119,11 @@ class Player {
             break;
           case "stove":
             openMenu();
+            break;
+          case "cow":
+            gameState = "cowGame";
+            player.x = width / 2;
+            player.y = height / 2;
             break;
         }
         break;
@@ -165,7 +185,7 @@ class Player {
     drawPlayer(this.graphic, this.x, this.y);
 
     // Close recipe book when out of range of the stoves
-    if (this.y < 80 || this.y > 110 || this.x < 60 || this.x > 180) {
+    if (this.y < 80 || this.y > 110 || this.x < 40 || this.x > 180) {
       recipe_book.classList.add("hidden");
     }
   }
